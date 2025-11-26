@@ -13,7 +13,6 @@ get_biodiv_data_db <- function(andes_db_connection) {
     result <- DBI::dbSendQuery(andes_db_connection, query)
     df <- DBI::dbFetch(result, n = Inf)
     DBI::dbClearResult(result)
-
     return(df)
 }
 
@@ -32,6 +31,11 @@ get_biodiv_data <- function(andes_db_connection) {
 
     # biodiv_data <- biodiv_data[to_keep]
 
+    # Faire Event_id:n
+    # ANDES_SET_NUM
+    # fieldNumber
+    # df <- format_event_id(df)
+    # shared_models_sample.sample_number AS ANDES_SET_NUM, -- will need to make the eventID
 
     return(biodiv_data)
 
