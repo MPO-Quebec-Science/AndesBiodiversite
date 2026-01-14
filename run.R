@@ -1,6 +1,7 @@
 # Voici un fichier exemple pour tester tes changements localement avant de les pousser vers le dépôt github
 
 # loader le package localement pour tester tes changements
+
 devtools::load_all()
 
 # tester ces variables environnementals pour pouvoir établir une connexion
@@ -19,7 +20,8 @@ andes_db_connection <- andes_db_connect(
 )
 
 # tester votre nouveux code
+devtools::load_all()
 df <- get_biodiv_data(andes_db_connection)
-
+View(df)
 # documenter vos changements
 devtools::document()

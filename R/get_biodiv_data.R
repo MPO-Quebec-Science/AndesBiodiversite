@@ -21,7 +21,7 @@ get_biodiv_data <- function(andes_db_connection) {
 
     biodiv_data <- get_biodiv_data_db(andes_db_connection)
 
-    # there are catches athat are for the commercial survey,
+    # there are catches that are for the commercial survey,
     # normally they can be weeded out by filtering using the basket class
     # BUT! there aren't always baskets for cases that have relative abundances
 
@@ -30,12 +30,36 @@ get_biodiv_data <- function(andes_db_connection) {
     # to_keep <- has_biodiv_basket | has_abundance_category
 
     # biodiv_data <- biodiv_data[to_keep]
+    biodiv_data$scientificNameID <- paste0("urn:lsid:marinespecies.org:taxname:", biodiv_data$scientificNameID)
 
-    # Faire Event_id:n
-    # ANDES_SET_NUM
-    # fieldNumber
-    # df <- format_event_id(df)
-    # shared_models_sample.sample_number AS ANDES_SET_NUM, -- will need to make the eventID
+    # construction du EventID
+    #  - fieldNumber (nom de la station)
+    # TODO: ajout 16E et ou 16F?
+    biodiv_data$EventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, sep = "-")
+
+    # FRACTION_DENOMINATOR en fonction du from_mixed_catch
+    biodiv_data$FRACTION_DENOMINATOR[biodiv_data$from_mixed_catch == 1] <- 1
+    biodiv_data$FRACTION_DENOMINATOR[is.na(biodiv_data$from_mixed_catch)] <- 4
+
+
+
+    # effacer les colonnes inutiles / uniquement conserver les bonnes colonnes
+    cols_to_keep <- c(
+        "scientificName",
+        "scientificNameID",
+        "VALIDATED_FINAL_COUNT",
+        "VALIDATED_FINAL_MASS_G",
+        "VALIDATED_FRACTION_COUNT",
+        "VALIDATED_FRACTION_MASS_G",
+        "FRACTION_DENOMINATOR",
+        "ANDES_SET",
+        "FIELD_SAMPLE_NOTE",
+        "recordNumber",
+        "fieldNumber",
+        "eventID"
+    )
+    # biodiv_data <- biodiv_data[, cols_to_keep]
+
 
     return(biodiv_data)
 

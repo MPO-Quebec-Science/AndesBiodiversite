@@ -2,7 +2,7 @@ SELECT
 --	shared_models_catch.id as catch_id,
     shared_models_referencecatch.aphia_id as scientificNameID, -- will need to make a urn 
     shared_models_referencecatch.scientific_name as scientificName,
-    shared_models_sample.sample_number AS ANDES_SET_NUM, -- need to make the eventID
+    shared_models_sample.sample_number AS ANDES_SET,
     shared_models_station.name AS fieldNumber, -- need to make the eventID
     shared_models_mission.mission_number AS mission, -- need to make the eventID
     shared_models_catch.id AS recordNumber,
@@ -43,7 +43,7 @@ AND shared_models_referencecatch.is_mixed_catch=0
 GROUP BY
     scientificNameID,
     scientificName,
-    ANDES_SET_NUM,
+    ANDES_SET,
     fieldNumber,
     mission,
     recordNumber,
@@ -51,6 +51,6 @@ GROUP BY
     FIELD_SAMPLE_NOTE,
     class,
     from_mixed_catch
-ORDER BY ANDES_SET_NUM ASC
+ORDER BY ANDES_SET ASC
 --  need to filter by active mission, this should be done in the R function
 -- WHERE mix_parent_refcatch.is_mixed_catch = 1

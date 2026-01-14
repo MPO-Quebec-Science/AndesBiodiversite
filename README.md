@@ -1,6 +1,6 @@
 # ANDES Biodiversité
 
-Ce dépot contient des wrappers en `R` de commandes `SQL` pour extraire des données de crabe des neiges (équipe IML de la région du Québec) fait avec ANDES.
+Ce dépot contient des wrappers en `R` de commandes `SQL` pour extraire des données de biodiversité (équipe IML de la région du Québec) fait avec ANDES.
 
 ## Requirements
 The `{MySQL ODBC 8.0 Unicode Driver}` should be available on DFO workstations. It can be installed in the software center.
