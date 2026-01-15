@@ -35,7 +35,7 @@ get_biodiv_data <- function(andes_db_connection) {
     # construction du EventID
     #  - fieldNumber (nom de la station)
     # TODO: ajout 16E et ou 16F?
-    biodiv_data$EventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, sep = "-")
+    biodiv_data$eventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, sep = "-")
 
     # FRACTION_DENOMINATOR en fonction du from_mixed_catch
     biodiv_data$FRACTION_DENOMINATOR[biodiv_data$from_mixed_catch == 1] <- 1
@@ -45,6 +45,7 @@ get_biodiv_data <- function(andes_db_connection) {
 
     # effacer les colonnes inutiles / uniquement conserver les bonnes colonnes
     cols_to_keep <- c(
+        "eventID",
         "scientificName",
         "scientificNameID",
         "VALIDATED_FINAL_COUNT",
@@ -52,13 +53,15 @@ get_biodiv_data <- function(andes_db_connection) {
         "VALIDATED_FRACTION_COUNT",
         "VALIDATED_FRACTION_MASS_G",
         "FRACTION_DENOMINATOR",
+        "REL_ABUNDANCE_CODE",
+        "REL_ABUNDANCE_DESC",
         "ANDES_SET",
-        "FIELD_SAMPLE_NOTE",
+        "occurrenceRemarks",
+        "eventRemarks",
         "recordNumber",
-        "fieldNumber",
-        "eventID"
+        "fieldNumber"
     )
-    # biodiv_data <- biodiv_data[, cols_to_keep]
+    biodiv_data <- biodiv_data[, cols_to_keep]
 
 
     return(biodiv_data)

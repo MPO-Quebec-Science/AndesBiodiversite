@@ -17,6 +17,10 @@ Un éffort a été fait pour aligner les colonnes des données avec le standard 
 Cependant, certaines colonnes spécifiques à l'étude ont été ajoutées.
 Ces derniers utiliseent des lettres majuscules pour les différencier des colonnes DarwinCore.
 
+`eventID` Term DwC. L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number` et `fieldNumber`. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
+`fieldNumber` Term DwC. Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES,
+`ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id. Ce champ est nécessaire car il est possible avoir plusiers traits à la même station.
+`recordNumber` ID de l'occurrence dans ANDES. Ce champ à une corréspondance directe avec `shared_models_catch.id` dans ANDES.
 `scientificName` Term DwC. Nom scientifique de l'espèce. Ce champ à une corréspondance directe avec `shared_models_referencecatch.scientific_name` dans ANDES.
 `scientificNameID` Term DwC.Sous la forme urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce champ à une corréspondance directe avec `shared_models_referencecatch.aphia_id` dans ANDES.
 `VALIDATED_FINAL_COUNT` Le dénombrement totale pour le trait
@@ -24,10 +28,15 @@ Ces derniers utiliseent des lettres majuscules pour les différencier des colonn
 `VALIDATED_FRACTION_COUNT`
 `VALIDATED_FRACTION_MASS_G`
 `FRACTION_DENOMINATOR` 4 si panier biodiv 1 si table de tri au complet
-`FIELD_SAMPLE_NOTE` Commentaires saisies sur le terrain. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
-`ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id. Ce champ est nécessaire car il est possible avoir plusiers traits à la même station.
-`ech_congelo` `materialEntityType` OU `preparation` on hésite entre ces deux termes darwinCore. Qu'en penses-tu?
-`recordNumber`ID de l'occurrence dans ANDES. Ce champ à une corréspondance directe avec `shared_models_catch.id` dans ANDES.
-`fieldNumber` Term DwC. Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES,
-`eventID` Term DwC. L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number` et `fieldNumber`. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
+`REL_ABUNDANCE_CODE` cote d'abondance relative
+`REL_ABUNDANCE_DESC`
+`ech_congelo`: `materialEntityType` OU `preparation` on hésite entre ces deux termes darwinCore. A FAIRE!
+`occurrenceRemarks` Commentaires saisies sur le terrain via l'appli Biodiversité. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
+`eventRemarks` Commentaires saisies sur le terrain via le formulaire du trait. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
 
+## Rel abundance
+| Code| Description EN                    | Description FR                        |
+|-----|-----------------------------------|---------------------------------------|
+|1    |Species not abundant in capture	  | Espèce peu abondante dans la capture  |
+|2    |Species abundant in capture	      | Espèce abondante dans la capture      |
+|3    |Species very abundant in capture	  | Espèce très abondante dans la capture |
