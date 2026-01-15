@@ -33,15 +33,18 @@ get_biodiv_data <- function(andes_db_connection) {
     biodiv_data$scientificNameID <- paste0("urn:lsid:marinespecies.org:taxname:", biodiv_data$scientificNameID)
 
     # construction du EventID
+    #  - mission (numéro de la mission)
     #  - fieldNumber (nom de la station)
-    # TODO: ajout 16E et ou 16F?
+    # TODO: ajout 16E et ou 16F pour Petoncle Minagnie
     biodiv_data$eventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, sep = "-")
 
     # FRACTION_DENOMINATOR en fonction du from_mixed_catch
     biodiv_data$FRACTION_DENOMINATOR[biodiv_data$from_mixed_catch == 1] <- 1
     biodiv_data$FRACTION_DENOMINATOR[is.na(biodiv_data$from_mixed_catch)] <- 4
 
-
+    # convert kg to g
+    biodiv_data$VALIDATED_FINAL_MASS_G <- biodiv_data$VALIDATED_FINAL_MASS_G * 1000
+    biodiv_data$VALIDATED_FRACTION_MASS_G <- biodiv_data$VALIDATED_FRACTION_MASS_G * 1000
 
     # effacer les colonnes inutiles / uniquement conserver les bonnes colonnes
     cols_to_keep <- c(

@@ -25,11 +25,11 @@ Ces derniers utiliseent des lettres majuscules pour les différencier des colonn
 `scientificNameID` Term DwC.Sous la forme urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce champ à une corréspondance directe avec `shared_models_referencecatch.aphia_id` dans ANDES.
 `VALIDATED_FINAL_COUNT` Le dénombrement totale pour le trait
 `VALIDATED_FINAL_MASS_G` Le poids totale en grammes pour le trait
-`VALIDATED_FRACTION_COUNT`
-`VALIDATED_FRACTION_MASS_G`
+`VALIDATED_FRACTION_COUNT` Le dénombrement du sous-ech
+`VALIDATED_FRACTION_MASS_G` Le poids totale en grammes du sous-ech
 `FRACTION_DENOMINATOR` 4 si panier biodiv 1 si table de tri au complet
-`REL_ABUNDANCE_CODE` cote d'abondance relative
-`REL_ABUNDANCE_DESC`
+`REL_ABUNDANCE_CODE` Code pour la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.code` dans ANDES.
+`REL_ABUNDANCE_DESC` Description (anglais) de la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.description_eng` dans ANDES.
 `ech_congelo`: `materialEntityType` OU `preparation` on hésite entre ces deux termes darwinCore. A FAIRE!
 `occurrenceRemarks` Commentaires saisies sur le terrain via l'appli Biodiversité. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
 `eventRemarks` Commentaires saisies sur le terrain via le formulaire du trait. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
