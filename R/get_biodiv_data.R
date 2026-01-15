@@ -56,12 +56,45 @@ get_biodiv_data <- function(andes_db_connection) {
     biodiv_data$eventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, sep = "-")
 
     # FRACTION_DENOMINATOR en fonction du from_mixed_catch
-    biodiv_data$FRACTION_DENOMINATOR[biodiv_data$from_mixed_catch == 1] <- 1
-    biodiv_data$FRACTION_DENOMINATOR[is.na(biodiv_data$from_mixed_catch)] <- 4
+    biodiv_data$FRACTION_DENOMINATOR[biodiv_data$from_mixed_catch == 1] <- 4
+    biodiv_data$FRACTION_DENOMINATOR[is.na(biodiv_data$from_mixed_catch)] <- 1
+
+
+    # conversion en colonnes numériques
+    biodiv_data$VALIDATED_SUBSAMPLE_MASS_G <- as.numeric(biodiv_data$VALIDATED_SUBSAMPLE_MASS_G)
+    biodiv_data$VALIDATED_SUBSAMPLE_COUNT <- as.numeric(biodiv_data$VALIDATED_SUBSAMPLE_COUNT)
+    biodiv_data$basket_wt_kg <- as.numeric(biodiv_data$basket_wt_kg)
+    biodiv_data$unmeasured_specimen_count <- as.numeric(biodiv_data$unmeasured_specimen_count)
+
+
+    has_subsample <- !is.na(biodiv_data$VALIDATED_SUBSAMPLE_COUNT) & !is.na(biodiv_data$VALIDATED_SUBSAMPLE_MASS_G)
+    has_no_fractional_count <- is.na(biodiv_data$unmeasured_specimen_count) | biodiv_data$unmeasured_specimen_count == 0
+
+    needs_fraction_extrapolation <- has_subsample & has_no_fractional_count
+    # Extrapolate the fractional count
+    # basket_wt_kg should have been entered
+    biodiv_data$VALIDATED_FRACTION_MASS_G[needs_fraction_extrapolation] <- biodiv_data$basket_wt_kg[needs_fraction_extrapolation]
+    biodiv_data$VALIDATED_FRACTION_COUNT[needs_fraction_extrapolation] <- biodiv_data$VALIDATED_FRACTION_MASS_G[needs_fraction_extrapolation] *
+        biodiv_data$VALIDATED_SUBSAMPLE_COUNT[needs_fraction_extrapolation] / 
+        biodiv_data$VALIDATED_SUBSAMPLE_MASS_G[needs_fraction_extrapolation]
+
+    # For others, use the basket weight and count directly
+    biodiv_data$VALIDATED_FRACTION_MASS_G[!needs_fraction_extrapolation] <- biodiv_data$basket_wt_kg[!needs_fraction_extrapolation]
+    biodiv_data$VALIDATED_FRACTION_COUNT[!needs_fraction_extrapolation] <- biodiv_data$unmeasured_specimen_count[!needs_fraction_extrapolation]
+
+    # calculate final values
+    biodiv_data$VALIDATED_FINAL_MASS_G <- biodiv_data$VALIDATED_FRACTION_MASS_G * biodiv_data$FRACTION_DENOMINATOR
+    biodiv_data$VALIDATED_FINAL_COUNT <- biodiv_data$VALIDATED_FRACTION_COUNT * biodiv_data$FRACTION_DENOMINATOR
 
     # convert kg to g
     biodiv_data$VALIDATED_FINAL_MASS_G <- biodiv_data$VALIDATED_FINAL_MASS_G * 1000
     biodiv_data$VALIDATED_FRACTION_MASS_G <- biodiv_data$VALIDATED_FRACTION_MASS_G * 1000
+    biodiv_data$VALIDATED_SUBSAMPLE_MASS_G <- biodiv_data$VALIDATED_SUBSAMPLE_MASS_G * 1000
+
+    # remove line breaks from comments field (replace with space)
+    biodiv_data$eventRemarks <- gsub("[\r\n]", " ", biodiv_data$eventRemarks)
+    biodiv_data$occurrenceRemarks <- gsub("[\r\n]", " ", biodiv_data$occurrenceRemarks)
+
 
     # effacer les colonnes inutiles / uniquement conserver les bonnes colonnes
     cols_to_keep <- c(
@@ -72,6 +105,8 @@ get_biodiv_data <- function(andes_db_connection) {
         "VALIDATED_FINAL_MASS_G",
         "VALIDATED_FRACTION_COUNT",
         "VALIDATED_FRACTION_MASS_G",
+        "VALIDATED_SUBSAMPLE_COUNT",
+        "VALIDATED_SUBSAMPLE_MASS_G",
         "FRACTION_DENOMINATOR",
         "REL_ABUNDANCE_CODE",
         "REL_ABUNDANCE_DESC",

@@ -23,16 +23,27 @@ Ces derniers utiliseent des lettres majuscules pour les différencier des colonn
 `recordNumber` ID de l'occurrence dans ANDES. Ce champ à une corréspondance directe avec `shared_models_catch.id` dans ANDES.
 `scientificName` Term DwC. Nom scientifique de l'espèce. Ce champ à une corréspondance directe avec `shared_models_referencecatch.scientific_name` dans ANDES.
 `scientificNameID` Term DwC.Sous la forme urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce champ à une corréspondance directe avec `shared_models_referencecatch.aphia_id` dans ANDES.
-`VALIDATED_FINAL_COUNT` Le dénombrement totale pour le trait
-`VALIDATED_FINAL_MASS_G` Le poids totale en grammes pour le trait
-`VALIDATED_FRACTION_COUNT` Le dénombrement du sous-ech
-`VALIDATED_FRACTION_MASS_G` Le poids totale en grammes du sous-ech
+`VALIDATED_FINAL_COUNT` Le dénombrement totale pour le trait (toute la table de tri)
+`VALIDATED_FINAL_MASS_G` Le poids totale en grammes pour le trait (toute la table de tri)
+`VALIDATED_FRACTION_COUNT` Le dénombrement du sous-ech (panier Biodiversité)
+`VALIDATED_FRACTION_MASS_G` Le poids totale en grammes du sous-ech (panier Biodiversité)
+`VALIDATED_SUBSAMPLE_COUNT` Le dénombrement du sous-ech (sous ech règle de trois)
+`VALIDATED_SUBSAMPLE_MASS_G` Le poids totale en grammes du sous-ech (sous ech règle de trois)
 `FRACTION_DENOMINATOR` 4 si panier biodiv 1 si table de tri au complet
 `REL_ABUNDANCE_CODE` Code pour la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.code` dans ANDES.
 `REL_ABUNDANCE_DESC` Description (anglais) de la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.description_eng` dans ANDES.
 `ech_congelo`: `materialEntityType` OU `preparation` on hésite entre ces deux termes darwinCore. A FAIRE!
 `occurrenceRemarks` Commentaires saisies sur le terrain via l'appli Biodiversité. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
 `eventRemarks` Commentaires saisies sur le terrain via le formulaire du trait. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
+
+## Les trois niveaux d'échantionnage
+
+`_FINAL_` Le totale pour le trait (toute la table de tri)
+`_FRACTION_` L'échantionnage pour charactrérisation de la biodiversité (panier Biodiversité)
+`_SUBSAMPLE_` Un sous-ech de la charactrérisation de la biodiversité quand N>30 (sous ech règle de trois)
+
+![Les trois niveaux ](vignettes/trois_niveaux_biodiv.png)
+
 
 ## Rel abundance
 | Code| Description EN                    | Description FR                        |
