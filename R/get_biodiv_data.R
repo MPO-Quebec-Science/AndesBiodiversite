@@ -1,9 +1,19 @@
-
+#' Gets get_biodiv_data_db (raw database results)
+#'
+#' This function executes a SQL query to retrieve the needed andes data to construct the Biodiversity table.
+#' The current ANDES active mission will determine for which mission the data are returned.
+#'
+#' This function is intended for internal use and returns raw results from the database.
+#' It is not meant for direct use in analysis or reporting. Users should use `get_biodiv_data`
+#'
+#' @param andes_db_connection a connection object to the ANDES database.
+#' @return A dataframe containing the biodiversity data set data.
+#' @seealso [get_capture_mollusque()] for the formatted results
+#' @export
 get_biodiv_data_db <- function(andes_db_connection) {
-
     # query <- readr::read_file(system.file("sql_queries",
     #                                       "biodiv_data.sql",
-    #                                       package = "ANDESBiodiv"))
+    #                                       package = "AndesBiodiversite"))
     query <- readr::read_file("inst/sql_queries/biodiv_data.sql")
 
     # add mission filter
@@ -16,9 +26,16 @@ get_biodiv_data_db <- function(andes_db_connection) {
     return(df)
 }
 
-
+#' Gets get_biodiv_data (raw database results)
+#'
+#' This function executes a SQL query to retrieve the needed andes data to construct the Biodiversity table.
+#' The current ANDES active mission will determine for which mission the data are returned.
+#'
+#' @param andes_db_connection a connection object to the ANDES database.
+#' @return A dataframe containing the biodiversity data set data.
+#' @seealso [get_biodiv_data_db()] for the formatted results
+#' @export
 get_biodiv_data <- function(andes_db_connection) {
-
     biodiv_data <- get_biodiv_data_db(andes_db_connection)
 
     # there are catches that are for the commercial survey,
@@ -66,7 +83,5 @@ get_biodiv_data <- function(andes_db_connection) {
     )
     biodiv_data <- biodiv_data[, cols_to_keep]
 
-
     return(biodiv_data)
-
 }
