@@ -13,7 +13,7 @@ event_from_fishing_set <- function(set, parent_event = NULL) {
 
         event <- list()
         class(event) <- c("OBISEvent")
-        event$eventID <- paste(parent_event$eventID, set$sample_number, sep = "-")
+        event$eventID <- paste(parent_event$eventID, set$station_name, set$sample_number, sep = "-")
         event$parentEventID <- parent_event$eventID
 
         event$start_dt_p <- 6

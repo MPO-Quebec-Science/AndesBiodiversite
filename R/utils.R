@@ -6,7 +6,7 @@
 #' @param tz An optional timezone string.
 #' @return A string formatted according to OBIS standards.
 #' @export
-obis_datetime_str <- function(dt, precision, tz = NULL) {
+obis_datetime_str <- function(dt, precision = 6, tz = NULL) {
   if (!is.null(tz)) {
     dt_in_user_timezone <- lubridate::with_tz(dt, tzone = tz)
   } else {
@@ -59,5 +59,38 @@ obis_time_str <- function(dt, precision, tz = NULL) {
   } else {
     stop("Precision not implemented")
   }
-  return(lubridate::format_ISO8601(dt_in_user_timezone, usetz = TRUE, format = format_str)
-)
+  return(lubridate::format_ISO8601(dt_in_user_timezone, usetz = TRUE, format = format_str))
+}
+
+#' @export
+.calc_nautical_dist <- function(p1_lat, p1_lon, p2_lat, p2_lon) {
+  # Haversine formula
+  R <- 6371  # Earth radius in km
+  delta_lat <- (p2_lat - p1_lat) * (pi / 180)
+  delta_lon <- (p2_lon - p1_lon) * (pi / 180)
+  a <- sin(delta_lat / 2) * sin(delta_lat / 2) +
+    cos(p1_lat * (pi / 180)) * cos(p2_lat * (pi / 180)) *
+    sin(delta_lon / 2) * sin(delta_lon / 2)
+  c <- 2 * atan2(sqrt(a), sqrt(1 - a))
+  distance_km <- R * c
+  distance_nautical_miles <- distance_km / 1.852
+  return(distance_nautical_miles)
+
+}
+
+#' rbind, but allow different columns names
+#' Make a union of the rows filling missing columns with NA
+#' 
+#'  https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns
+row_union <- function(df1, df2) {
+  # special case when the first df is NULL
+  if (is.null(df1) && !is.null(df2)) {
+    return(df2)
+  }
+
+  res <- rbind(
+    data.frame(c(df1, sapply(setdiff(names(df2), names(df1)), function(x) NA))),
+    data.frame(c(df2, sapply(setdiff(names(df1), names(df2)), function(x) NA)))
+  )
+  return(res)
+}

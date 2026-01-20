@@ -1,5 +1,5 @@
 ---
-title: "Format des données"
+title: "Format des données quantitatives"
 output: rmarkdown::html_document
 nocite: '@*'
 ---
@@ -17,37 +17,84 @@ Un éffort a été fait pour aligner les colonnes des données avec le standard 
 Cependant, certaines colonnes spécifiques à l'étude ont été ajoutées.
 Ces derniers utiliseent des lettres majuscules pour les différencier des colonnes DarwinCore.
 
-`eventID` Term DwC. L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number` et `fieldNumber`. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
-`fieldNumber` Term DwC. Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES,
-`ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id. Ce champ est nécessaire car il est possible avoir plusiers traits à la même station.
+`eventID` Term DwC. L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number`, `shared_models_station.name` et ``shared_models_sample.sample_number``. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
+
+`fieldNumber` Term DwC. Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES.
+
+`ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id. Ce champ est nécessaire car il est possible avoir plusiers traits à la même station. Ce champ à une corréspondance directe avec `shared_models_sample.sample_number` dans ANDES.
+
 `recordNumber` ID de l'occurrence dans ANDES. Ce champ à une corréspondance directe avec `shared_models_catch.id` dans ANDES.
+
 `scientificName` Term DwC. Nom scientifique de l'espèce. Ce champ à une corréspondance directe avec `shared_models_referencecatch.scientific_name` dans ANDES.
+
 `scientificNameID` Term DwC.Sous la forme urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce champ à une corréspondance directe avec `shared_models_referencecatch.aphia_id` dans ANDES.
-`VALIDATED_FINAL_COUNT` Le dénombrement totale pour le trait (toute la table de tri)
-`VALIDATED_FINAL_MASS_G` Le poids totale en grammes pour le trait (toute la table de tri)
-`VALIDATED_FRACTION_COUNT` Le dénombrement du sous-ech (panier Biodiversité)
-`VALIDATED_FRACTION_MASS_G` Le poids totale en grammes du sous-ech (panier Biodiversité)
-`VALIDATED_SUBSAMPLE_COUNT` Le dénombrement du sous-ech (sous ech règle de trois)
-`VALIDATED_SUBSAMPLE_MASS_G` Le poids totale en grammes du sous-ech (sous ech règle de trois)
-`FRACTION_DENOMINATOR` 4 si panier biodiv 1 si table de tri au complet
-`REL_ABUNDANCE_CODE` Code pour la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.code` dans ANDES.
-`REL_ABUNDANCE_DESC` Description (anglais) de la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.description_eng` dans ANDES.
+
 `ech_congelo`: `materialEntityType` OU `preparation` on hésite entre ces deux termes darwinCore. A FAIRE!
+
 `occurrenceRemarks` Commentaires saisies sur le terrain via l'appli Biodiversité. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
+
 `eventRemarks` Commentaires saisies sur le terrain via le formulaire du trait. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
 
 ## Les trois niveaux d'échantionnage
 
-`_FINAL_` Le totale pour le trait (toute la table de tri)
-`_FRACTION_` L'échantionnage pour charactrérisation de la biodiversité (panier Biodiversité)
-`_SUBSAMPLE_` Un sous-ech de la charactrérisation de la biodiversité quand N>30 (sous ech règle de trois)
+`SUBSAMPLE_COUNT` : ($N_\mathrm{ech}$) Dénombrement des individu prélevés pour un sous-échantillon lorsque la quantité total de cette espèce est trop importante ou impossible à compter par sa nature (exemple : éponge encroutante). Ce sous-échantillon provient souvent du tri de l'espèce, mais il peux provenir du tri totale.
+
+`SUBSAMPLE_MASS_G` : ($M_\mathrm{ech}$) Poids des individu prélevés pour un sous-échantillon lorsque la quantité total de cette espèce est trop importante ou impossible à compter par sa nature (exemple : éponge encroutante). Ce sous-échantillon provient souvent du tri de l'espèce, mais il peux provenir du tri totale.
+
+`SORTED_COUNT` : ($N_\mathrm{tri}$) Dénombrement des individus TRIÉS d'un espèce.
+
+`SORTED_MASS` : ($M_\mathrm{tri}$) Poids des individus TRIÉS d'un espèce.
+
+`FINAL_COUNT` : ($N_\mathrm{tot}$) Résultat d'un calcul. Représente le dénombrement et le poids ramené à la capture totale. (calcul= SORTED*MULTIPLICATEUR).
+
+`FINAL_MASS` : ($M_\mathrm{tot}$)Résultat d'un calcul. Représente le poids ramené à la capture totale. (calcul= SORTED*MULTIPLICATEUR)
+
+`MULTIPLICATEUR` : ($k$) Valeur utilisé pour ramener la fraction du tri de l'espèce à la capture totale.
+
+### Définitions mathématiques
+
+Pour une espece donné, les valeurs de dénombrement $N_\mathrm{tot}$ et masse $M_\mathrm{tot}$ sont calculées à partir des valeurs triées $N_\mathrm{tri}$ et $M_\mathrm{tri}$ comme suit:
+$$
+\begin{eqnarray}
+N_\mathrm{tot} = k N_\mathrm{tri} \\
+M_\mathrm{tot} = k M_\mathrm{tri} ,
+\end{eqnarray}
+$$
+ou le multiplicateur $k$ est défini comme suit:
+$$
+k =
+\begin{cases}
+    1, & \text{tri de l'espece sur la capture complète} \\
+    4, & \text{tri de l'espece sur le quart Biodiversité}.
+\end{cases}
+$$
+Mais il peux avoir d'autre valeurs exceptionel selon la fraction triée.
+
+Il arrive parfois que $N_\mathrm{tri}$ proviennt d'une extrapolation d'un sous-échantillon $N_\mathrm{ech}\approx 30$ quand le dénombrement est trop fastidieux :).
+Dans le cas échéant, un sous-échantillon est prélevé et dénombré, puis le dénombrement du tri est estimé comme suit:
+$$
+N_\mathrm{tri} = N_\mathrm{ech} \frac{M_\mathrm{tri}}{M_\mathrm{ech}},
+$$où les masses $M_\mathrm{tri}$ et $M_\mathrm{ech}$ sont mesurées respectivement sur le tri et le sous-échantillon.
+
+Exceptionellement pour les relevés de concombre de mer, le dénombrement du tri est éffectué, mais c'est la masse du tri $M_\mathrm{tri}$ qui est estimée à partir d'un sous-échantillon: 
+$$
+M_\mathrm{tri} = M_\mathrm{ech} \frac{N_\mathrm{tri}}{N_\mathrm{ech}}.
+$$
 
 ![Les trois niveaux ](vignettes/trois_niveaux_biodiv.png)
 
 
-## Rel abundance
-| Code| Description EN                    | Description FR                        |
-|-----|-----------------------------------|---------------------------------------|
-|1    |Species not abundant in capture	  | Espèce peu abondante dans la capture  |
-|2    |Species abundant in capture	      | Espèce abondante dans la capture      |
-|3    |Species very abundant in capture	  | Espèce très abondante dans la capture |
+## Cote d'abondance relative
+Les colonnes suivantes décrivent la cote d'abondance relative assignée à chaque espèce capturée lors d'un trait.
+
+`REL_ABUNDANCE_CODE` Code (1,2,3) pour la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.code` dans ANDES.
+
+`REL_ABUNDANCE_DESC` Description (anglais) de la cote d'abondance relative. Ce champ à une corréspondance directe avec `shared_models_relativeabundancecategory.description_eng` dans ANDES.
+
+
+| Code| Description EN                    | Description FR                      |
+|-----|-----------------------------------|-------------------------------------|
+|1    |Species not abundant in capture	  | Faible, <5 dans la capture totale   |
+|2    |Species abundant in capture	      | Modéré, 5-49 dans la capture totale |
+|3    |Species very abundant in capture	  | Élevé,  >49 dans la capture totale  |
+

@@ -53,7 +53,7 @@ get_biodiv_data <- function(andes_db_connection) {
     #  - mission (numéro de la mission)
     #  - fieldNumber (nom de la station)
     # TODO: ajout 16E et ou 16F pour Petoncle Minagnie
-    biodiv_data$eventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, sep = "-")
+    biodiv_data$eventID <- paste(biodiv_data$mission, biodiv_data$fieldNumber, biodiv_data$sample_number, sep = "-")
 
     # FRACTION_DENOMINATOR en fonction du from_mixed_catch
     biodiv_data$FRACTION_DENOMINATOR[biodiv_data$from_mixed_catch == 1] <- 4
