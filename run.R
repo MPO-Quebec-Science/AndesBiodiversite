@@ -30,3 +30,19 @@ write.csv(obis$occurrence, "IML-2024-009-event.csv", row.names = FALSE, na = "")
 
 # documenter vos changements
 devtools::document()
+
+devtools::build_rmd("vignettes/column_definitions.Rmd")
+
+# roulez vos tests!
+devtools::test()
+
+# roulez vos exemples
+devtools::run_examples()
+
+# tester le package
+rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-examples"), error_on = "error")
+
+# contruire la documentation avec pkgdown
+pkgdown::build_site()
+pkgdown::build_reference()
+pkgdown::build_articles()
