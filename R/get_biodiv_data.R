@@ -95,7 +95,7 @@ get_biodiv_data <- function(andes_db_connection) {
     biodiv_data$eventRemarks <- gsub("[\r\n]", " ", biodiv_data$eventRemarks)
     biodiv_data$occurrenceRemarks <- gsub("[\r\n]", " ", biodiv_data$occurrenceRemarks)
 
-
+    biodiv_data$ANDES_SET <- biodiv_data$sample_number
     # effacer les colonnes inutiles / uniquement conserver les bonnes colonnes
     cols_to_keep <- c(
         "eventID",
