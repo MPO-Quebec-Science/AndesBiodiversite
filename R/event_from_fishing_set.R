@@ -44,6 +44,23 @@ event_from_fishing_set <- function(set, parent_event = NULL, quiet = FALSE) {
 
   event$coordinateUncertaintyInMeters <- round(coordinateUncertaintyInMeters, digits = 3)
 
+  if (is.numeric(event$decimalLatitude) & is.numeric(event$decimalLongitude)){
+    coordinateUncertaintyInMeters <- 1852 * 0.5 * .calc_nautical_dist(
+      p1_lat = set$start_latitude,
+      p1_lon = set$start_longitude,
+      p2_lat = set$end_latitude,
+      p2_lon = set$end_longitude
+    )
+    event$coordinateUncertaintyInMeters <- round(coordinateUncertaintyInMeters, digits = 3)
+    event$geodeticDatum <- "epsg:4326"
+  } else {
+    event$coordinateUncertaintyInMeters <- NA
+    event$geodeticDatum <- NA
+  }
+
+  event$year <- obis_datetime_str(set$start_date, precision = 1)
+  event$continent <- "North America"
+
   set_remarks <- set$remarks
   # remove line breaks
   set_remarks <- gsub("[\r\n]", " ", set_remarks)
@@ -51,13 +68,23 @@ event_from_fishing_set <- function(set, parent_event = NULL, quiet = FALSE) {
 
 
   event$footprintWKT <- make_set_wkt(set)
+  if (!is.null(event$footprintWKT)) {
+    event$footprintSRS <- "epsg:4326"
+  } else {
+    event$footprintSRS <- NA
+  }
+
+
+
   event$fieldNumber <- set$station_name
 
   event$maximumDepthInMeters <- as.numeric(set$max_depth_m)
   event$minimumDepthInMeters <- as.numeric(set$min_depth_m)
 
+
   # hard-coded values
-  event$eventType <- "SiteVisit" # https://registry.gbif-uat.org/vocabulary/EventType/concepts
+  # event$eventType <- "SiteVisit" # https://registry.gbif-uat.org/vocabulary/EventType/concepts
+  event$eventType <- "Deployment" # https://registry.gbif-uat.org/vocabulary/EventType/concepts
 
   return(event)
 }

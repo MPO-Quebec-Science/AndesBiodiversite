@@ -17,9 +17,35 @@ Un éffort a été fait pour aligner les colonnes des données avec le standard 
 Cependant, certaines colonnes spécifiques à l'étude ont été ajoutées.
 Ces derniers utiliseent des lettres majuscules pour les différencier des colonnes DarwinCore.
 
-`eventID` Term DwC. L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number`, `shared_models_station.name` et ``shared_models_sample.sample_number``. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
+`eventID` [Terme DwC]("http://rs.tdwg.org/dwc/terms/eventID") : L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number`, `shared_models_station.name` et ``shared_models_sample.sample_number``. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
 
-`fieldNumber` Term DwC. Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES.
+`fieldNumber` [Term DwC](http://rs.tdwg.org/dwc/terms/fieldNumber) : Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES.
+
+`decimalLatitude` [Terme DwC](http://rs.tdwg.org/dwc/terms/decimalLatitude) : Latitude décimale en WGS84. Ce champ calcule la moyenne `shared_models_sample.start_latitude` et `shared_models_sample.end_latitude` dans ANDES.
+
+`decimalLongitude` [Terme DwC](http://rs.tdwg.org/dwc/terms/decimalLongitude) : Longitude décimale en WGS84. Ce champ calcule la moyenne `shared_models_sample.start_longitude` et `shared_models_sample.end_longitude` dans ANDES.
+
+`coordinateUncertaintyInMeters` [Terme DwC](http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters) : Précision des coordonnées en mètres. Ce champ calcule la moitié de la distance entre les points de début et de fin du trait.
+
+`geodeticDatum` [Terme DwC](http://rs.tdwg.org/dwc/terms/geodeticDatum) : Toujours "epsg:4326"
+
+`footprintWKT` [Terme DwC](http://rs.tdwg.org/dwc/terms/footprintWKT) : Polygone WKT représentant l'empreinte géographique du trait. Ce champ est construit à partir des coordonnées de début et de fin du trait. Elle comprends la profondeur (en metres) en tant qu'élévation z négative, si les observations du trait `start_depth_m` et `end_depth_m` sont présentes.
+
+`footprintSRS` [Terme DwC](http://rs.tdwg.org/dwc/terms/footprintSRS) : Toujours "epsg:4326" si `footprintWKT` est présent.
+
+`year` [Terme DwC](http://rs.tdwg.org/dwc/terms/year) 
+
+`country` [Terme DwC](http://rs.tdwg.org/dwc/terms/countryCode) : Toujours "Canada"
+
+`countryCode` [Terme DwC](http://rs.tdwg.org/dwc/terms/countryCode) : Toujours "CA"
+
+`continent`[Terme DwC](http://rs.tdwg.org/dwc/terms/continent) : Toujours "North America"
+
+`eventType` [Terme DwC](http://rs.tdwg.org/dwc/terms/eventType) : Soit "Project" pour la mission ou "Deployment" pour un trait. Voir [termes](https://registry.gbif-uat.org/vocabulary/EventType/concepts)
+
+`minimumDepthInMeters` [Terme DwC](http://rs.tdwg.org/dwc/terms/minimumDepthInMeters) : Ce champ à une corréspondance directe avec l'observation `min_depth_m` du trait dans ANDES.
+
+`maximumDepthInMeters` [Terme DwC](http://rs.tdwg.org/dwc/terms/maximumDepthInMeters) : Ce champ à une corréspondance directe avec l'observation `min_depth_m` du trait dans ANDES.
 
 `ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id. Ce champ est nécessaire car il est possible avoir plusiers traits à la même station. Ce champ à une corréspondance directe avec `shared_models_sample.sample_number` dans ANDES.
 
@@ -33,7 +59,22 @@ Ces derniers utiliseent des lettres majuscules pour les différencier des colonn
 
 `occurrenceRemarks` Commentaires saisies sur le terrain via l'appli Biodiversité. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
 
-`eventRemarks` Commentaires saisies sur le terrain via le formulaire du trait. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
+`eventRemarks`[terme DwC](https://dwc.tdwg.org/terms/#dwc:eventRemarks) : Commentaires saisies sur le terrain via le formulaire du trait. Ce champ à une corréspondance directe avec `shared_models_catch.notes` dans ANDES.
+
+`language` [terme DwC](http://purl.org/dc/terms/language) : Toujours "En"
+
+`license` [terme DwC](http://purl.org/dc/terms/license) :  Toujours "http://creativecommons.org/licenses/by/4.0/legalcode"
+
+`rightsHolder` [terme DwC](http://purl.org/dc/terms/rightsHolder) : Toujours ""His Majesty the King in right of Canada, as represented by the Minister of Fisheries and Oceans"
+
+`institutionID` [terme DwC](http://rs.tdwg.org/dwc/terms/institutionID) : Toujours "https://edmo.seadatanet.org/report/4160"
+
+`institutionCode` [terme DwC](http://rs.tdwg.org/dwc/terms/institutionCode) : Toujours "IML"
+
+`datasetName` [terme DwC](http://rs.tdwg.org/dwc/terms/datasetName) : Toujours vide, doit etre remplis manuellement.
+
+`datasetID` [terme DwC](http://rs.tdwg.org/dwc/terms/datasetID) : Toujours vide, doit etre remplis manuellement.
+
 
 ## Les trois niveaux d'échantionnage
 

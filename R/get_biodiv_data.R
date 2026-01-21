@@ -79,7 +79,7 @@ get_biodiv_data <- function(andes_db_connection) {
     biodiv_data$VALIDATED_SUBSAMPLE_MASS_G <- biodiv_data$VALIDATED_SUBSAMPLE_MASS_G * 1000
 
     # remove line breaks from comments field (replace with space)
-    biodiv_data$eventRemarks <- gsub("[\r\n]", " ", biodiv_data$eventRemarks)
+    # biodiv_data$eventRemarks <- gsub("[\r\n]", " ", biodiv_data$eventRemarks)
     biodiv_data$occurrenceRemarks <- gsub("[\r\n]", " ", biodiv_data$occurrenceRemarks)
 
     biodiv_data$ANDES_SET <- biodiv_data$sample_number
@@ -99,7 +99,6 @@ get_biodiv_data <- function(andes_db_connection) {
         "REL_ABUNDANCE_DESC",
         "ANDES_SET",
         "occurrenceRemarks",
-        "eventRemarks",
         "recordNumber",
         "fieldNumber"
     )

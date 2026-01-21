@@ -59,6 +59,7 @@ event_from_mission <- function(mission, parent = NULL, quiet = FALSE) {
     event$institutionID <- "https://edmo.seadatanet.org/report/4160"
     event$institutionCode <- "IML"
     event$datasetName <- NA
+    event$datasetID <- NA
     event$countryCode <- "CA"
     event$country <- "Canada"
 

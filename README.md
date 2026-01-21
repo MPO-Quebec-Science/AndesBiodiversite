@@ -1,25 +1,26 @@
 # ANDES Biodiversité
+[![Docs](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg)](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml)
 
 Ce dépot contient des wrappers en `R` de commandes `SQL` pour extraire des données de biodiversité (équipe IML de la région du Québec) fait avec ANDES.
 
 Voir la documentation complète ici: https://mpo-quebec-science.github.io/AndesBiodiversite/
 
-## Requirements
-The `{MySQL ODBC 8.0 Unicode Driver}` should be available on DFO workstations. It can be installed in the software center.
-Name: MySQL Connector ODBC
-Version 8.0.22
-
-URL: softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539
-
-List available drivers `using odbc::odbcListDrivers()` and see if it is present.
-
 
 # Installation
 
- - installer le `MySQL Connector ODBC` du centre logiciel
+ - installer le pilote MySQL `MySQL Connector ODBC` du centre logiciel
  - installer le package devtools `install.packages("devtools")`
- - installer devtools pour install le package `devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")`
+ - utiliser devtools pour installer le package `devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")`
 
+## Installation de pilotes MySQL
+Les requetes de la BD MySQL Andes requiert un pilote.
+Le pilote `{MySQL ODBC 8.0 Unicode Driver}` devraient être disponible pour les postes standards du MPO.
+Il peut être installé via le center logiciel.
+Nom: `MySQL Connector ODBC`
+Version `8.0.22`
+URL: `softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539`
+
+Une fois le pilote installé, essayez la commande `odbc::odbcListDrivers()` pour confirmé sa présence.
 
 
 # Utilisation
@@ -27,7 +28,7 @@ List available drivers `using odbc::odbcListDrivers()` and see if it is present.
 2. Obtenir les données avec `get_biodiv_data()` et `get_OBIS_archive()`
 
 
-## Connexion et authentification a la BD ANDES  
+## 1. Connexion et authentification a la BD ANDES  
 
 Il est FORTEMENT DÉCONSIELLER de mettre les mots de passes directement dans un script (mais vouz pouvez le faire temporairement pour déboguguer). Il faut voir les scripts comme étant publique et ouvert a tous.
 
@@ -47,7 +48,6 @@ mot_de_passe <- Sys.getenv("MOT_DE_PASSE_BD")
 Tester la connexion
 ``` R
 # établir connexion BD (il faut être sur le réseau MPO)
-source("R/andes_db_connect.R")
 andes_db_connection <- andes_db_connect(
   url_bd = url_bd,
   port_bd = port_bd,
@@ -56,6 +56,8 @@ andes_db_connection <- andes_db_connect(
   nom_bd = nom_bd
 )
 ```
+
+## 1. Obtenir les données avec `get_biodiv_data()` et `get_OBIS_archive()`
 
 ``` R
 df <- get_biodiv_data(andes_db_connection)
@@ -67,7 +69,7 @@ write.csv(df_obis$occurrence, "IML-2024-009-occurrence.csv", row.names = FALSE, 
 ```
 
 
-# Guide developpement
+# Guide developpement (avancé)
 Pour modifier ce package, il ne faut pas l'installer proprement dit, mais le "loader" à partir du code source (qu'on va vouloir éventuellement modifier).
 
 Il faut faire une séparation entre le code source *du package* et le code qui *utilise* le package.
@@ -83,6 +85,7 @@ Pour loader le package avec le code présent sous `./R/` (donc sans installer le
 ℹ Loading AndesBiodiversite
 > df <- get_biodiv_data(andes_db_connection)
 ```
+
 ## Documentation
 
 Documenter brievement les fonctions individuelles avec des commentaires sous le format `doxygen`.
