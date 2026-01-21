@@ -16,11 +16,9 @@ event_from_fishing_set <- function(set, parent_event = NULL) {
         event$eventID <- paste(parent_event$eventID, set$station_name, set$sample_number, sep = "-")
         event$parentEventID <- parent_event$eventID
 
-        event$start_dt_p <- 6
-        event$start_dt <- obis_datetime_str(set$start_date, precision = event$start_dt_p)
+        event$start_dt <- obis_datetime_str(set$start_date, precision = 6)
 
-        event$end_dt_p <- 6
-        event$end_dt <- obis_datetime_str(set$end_date, precision = event$end_dt_p)
+        event$end_dt <- obis_datetime_str(set$end_date, precision = 6)
 
         # use set bounding box
         event$decimalLatitude <- 0.5 * (set$start_latitude + set$end_latitude)

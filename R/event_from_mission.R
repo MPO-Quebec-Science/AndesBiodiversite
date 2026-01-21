@@ -14,11 +14,9 @@ event_from_mission <- function(mission, parent = NULL) {
 
     event$eventID <- mission$mission_number
 
-    event$start_dt_p <- 3
-    event$start_dt <- obis_datetime_str(mission$start_date, precision = event$start_dt_p)
+    event$start_dt <- obis_datetime_str(mission$start_date, precision = 3)
 
-    event$end_dt_p <- 3
-    event$end_dt <- obis_datetime_str(mission$end_date, precision = event$end_dt_p)
+    event$end_dt <- obis_datetime_str(mission$end_date, precision = 3)
 
     # use cruise bounding box
     event$decimalLatitude <- 0.5 * (mission$max_lat + mission$min_lat)
@@ -51,6 +49,8 @@ event_from_mission <- function(mission, parent = NULL) {
     event$datasetName <- NA
     event$countryCode <- "CA"
     event$country <- "Canada"
+
+
 
     return(event)
 }
