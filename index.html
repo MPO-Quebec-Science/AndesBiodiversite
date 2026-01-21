@@ -53,26 +53,26 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="andes-biodiversité">ANDES Biodiversité<a class="anchor" aria-label="anchor" href="#andes-biodiversit%C3%A9"></a>
 </h1></div>
+<p><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg" alt="Docs"></a></p>
 <p>Ce dépot contient des wrappers en <code>R</code> de commandes <code>SQL</code> pour extraire des données de biodiversité (équipe IML de la région du Québec) fait avec ANDES.</p>
 <p>Voir la documentation complète ici: <a href="https://mpo-quebec-science.github.io/AndesBiodiversite/" class="external-link uri">https://mpo-quebec-science.github.io/AndesBiodiversite/</a></p>
-<div class="section level2">
-<h2 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a>
-</h2>
-<p>The <code>{MySQL ODBC 8.0 Unicode Driver}</code> should be available on DFO workstations. It can be installed in the software center. Name: MySQL Connector ODBC Version 8.0.22</p>
-<p>URL: softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539</p>
-<p>List available drivers <code>using odbc::odbcListDrivers()</code> and see if it is present.</p>
-</div>
 </div>
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
 <ul>
-<li>installer le <code>MySQL Connector ODBC</code> du centre logiciel</li>
+<li>installer le pilote MySQL <code>MySQL Connector ODBC</code> du centre logiciel</li>
 <li>installer le package devtools <code>install.packages("devtools")</code>
 </li>
-<li>installer devtools pour install le package <code>devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")</code>
+<li>utiliser devtools pour installer le package <code>devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")</code>
 </li>
 </ul>
+<div class="section level2">
+<h2 id="installation-de-pilotes-mysql">Installation de pilotes MySQL<a class="anchor" aria-label="anchor" href="#installation-de-pilotes-mysql"></a>
+</h2>
+<p>Les requetes de la BD MySQL Andes requiert un pilote. Le pilote <code>{MySQL ODBC 8.0 Unicode Driver}</code> devraient être disponible pour les postes standards du MPO. Il peut être installé via le center logiciel. Nom: <code>MySQL Connector ODBC</code> Version <code>8.0.22</code> URL: <code>softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539</code></p>
+<p>Une fois le pilote installé, essayez la commande <code>odbc::odbcListDrivers()</code> pour confirmé sa présence.</p>
+</div>
 </div>
 <div class="section level1">
 <h1 id="utilisation">Utilisation<a class="anchor" aria-label="anchor" href="#utilisation"></a>
@@ -83,7 +83,7 @@
 </li>
 </ol>
 <div class="section level2">
-<h2 id="connexion-et-authentification-a-la-bd-andes">Connexion et authentification a la BD ANDES<a class="anchor" aria-label="anchor" href="#connexion-et-authentification-a-la-bd-andes"></a>
+<h2 id="id_1-connexion-et-authentification-a-la-bd-andes">1. Connexion et authentification a la BD ANDES<a class="anchor" aria-label="anchor" href="#id_1-connexion-et-authentification-a-la-bd-andes"></a>
 </h2>
 <p>Il est FORTEMENT DÉCONSIELLER de mettre les mots de passes directement dans un script (mais vouz pouvez le faire temporairement pour déboguguer). Il faut voir les scripts comme étant publique et ouvert a tous.</p>
 <p>Pour sauvegarder les mots de passes de BD, il faut faire une copie du fichier gabarit <code>exemple.Renviron</code> et le nomer <code>.Renviron</code>. Par la suite il faut remplir le nom d’usagé et le mot de passe pour pouvoir faire une connexion a la BD. Il est possible de falloir redémarré <code>R</code> apres avoir modifier <code>.Renviron</code> car la lecture est uniquement fait au démarage de <code>R</code>. Le fichier <code>.Renviron</code> peut être placé dans le dossier home de l’usager <code>C:\Users\TON_NOM</code> (sur windows) ou <code>/home/TON_NOM</code> (sur Linux).</p>
@@ -98,7 +98,6 @@
 <p>Tester la connexion</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># établir connexion BD (il faut être sur le réseau MPO)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html" class="external-link">source</a></span><span class="op">(</span><span class="st">"R/andes_db_connect.R"</span><span class="op">)</span></span>
 <span><span class="va">andes_db_connection</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/andes_db_connect.html">andes_db_connect</a></span><span class="op">(</span></span>
 <span>  url_bd <span class="op">=</span> <span class="va">url_bd</span>,</span>
 <span>  port_bd <span class="op">=</span> <span class="va">port_bd</span>,</span>
@@ -106,6 +105,11 @@
 <span>  mot_de_passe <span class="op">=</span> <span class="va">mot_de_passe</span>,</span>
 <span>  nom_bd <span class="op">=</span> <span class="va">nom_bd</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="id_1-obtenir-les-données-avec-get_biodiv_data-et-get_obis_archive">1. Obtenir les données avec <code>get_biodiv_data()</code> et <code>get_OBIS_archive()</code>
+<a class="anchor" aria-label="anchor" href="#id_1-obtenir-les-donn%C3%A9es-avec-get_biodiv_data-et-get_obis_archive"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_biodiv_data.html">get_biodiv_data</a></span><span class="op">(</span><span class="va">andes_db_connection</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"IML-2024-009-quantitative.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, na <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
@@ -116,7 +120,7 @@
 </div>
 </div>
 <div class="section level1">
-<h1 id="guide-developpement">Guide developpement<a class="anchor" aria-label="anchor" href="#guide-developpement"></a>
+<h1 id="guide-developpement-avancé">Guide developpement (avancé)<a class="anchor" aria-label="anchor" href="#guide-developpement-avanc%C3%A9"></a>
 </h1>
 <p>Pour modifier ce package, il ne faut pas l’installer proprement dit, mais le “loader” à partir du code source (qu’on va vouloir éventuellement modifier).</p>
 <p>Il faut faire une séparation entre le code source <em>du package</em> et le code qui <em>utilise</em> le package.</p>

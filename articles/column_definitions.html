@@ -70,16 +70,53 @@
 standard DarwinCore. Cependant, certaines colonnes spécifiques à l’étude
 ont été ajoutées. Ces derniers utiliseent des lettres majuscules pour
 les différencier des colonnes DarwinCore.</p>
-<p><code>eventID</code> Term DwC. L’identifiant de l’événement
-d’échantionnage. Ce champ est composé de
+<p><code>eventID</code> <a href="%22http://rs.tdwg.org/dwc/terms/eventID%22" class="external-link">Terme DwC</a> :
+L’identifiant de l’événement d’échantionnage. Ce champ est composé de
 <code>shared_models_mission.mission_number</code>,
 <code>shared_models_station.name</code> et
 <code>shared_models_sample.sample_number</code>. Avec l’unique exception
 de l’ajout de <code>16F</code> et <code>16E</code> pour les missions
 pétonlce Minganie.</p>
-<p><code>fieldNumber</code> Term DwC. Nom de la station. Ce champ à une
-corréspondance directe avec <code>shared_models_station.name</code> dans
-ANDES.</p>
+<p><code>fieldNumber</code> <a href="http://rs.tdwg.org/dwc/terms/fieldNumber" class="external-link">Term DwC</a> : Nom de la
+station. Ce champ à une corréspondance directe avec
+<code>shared_models_station.name</code> dans ANDES.</p>
+<p><code>decimalLatitude</code> <a href="http://rs.tdwg.org/dwc/terms/decimalLatitude" class="external-link">Terme DwC</a> :
+Latitude décimale en WGS84. Ce champ calcule la moyenne
+<code>shared_models_sample.start_latitude</code> et
+<code>shared_models_sample.end_latitude</code> dans ANDES.</p>
+<p><code>decimalLongitude</code> <a href="http://rs.tdwg.org/dwc/terms/decimalLongitude" class="external-link">Terme DwC</a> :
+Longitude décimale en WGS84. Ce champ calcule la moyenne
+<code>shared_models_sample.start_longitude</code> et
+<code>shared_models_sample.end_longitude</code> dans ANDES.</p>
+<p><code>coordinateUncertaintyInMeters</code> <a href="http://rs.tdwg.org/dwc/terms/coordinateUncertaintyInMeters" class="external-link">Terme
+DwC</a> : Précision des coordonnées en mètres. Ce champ calcule la
+moitié de la distance entre les points de début et de fin du trait.</p>
+<p><code>geodeticDatum</code> <a href="http://rs.tdwg.org/dwc/terms/geodeticDatum" class="external-link">Terme DwC</a> :
+Toujours “epsg:4326”</p>
+<p><code>footprintWKT</code> <a href="http://rs.tdwg.org/dwc/terms/footprintWKT" class="external-link">Terme DwC</a> :
+Polygone WKT représentant l’empreinte géographique du trait. Ce champ
+est construit à partir des coordonnées de début et de fin du trait. Elle
+comprends la profondeur (en metres) en tant qu’élévation z négative, si
+les observations du trait <code>start_depth_m</code> et
+<code>end_depth_m</code> sont présentes.</p>
+<p><code>footprintSRS</code> <a href="http://rs.tdwg.org/dwc/terms/footprintSRS" class="external-link">Terme DwC</a> :
+Toujours “epsg:4326” si <code>footprintWKT</code> est présent.</p>
+<p><code>year</code> <a href="http://rs.tdwg.org/dwc/terms/year" class="external-link">Terme
+DwC</a></p>
+<p><code>country</code> <a href="http://rs.tdwg.org/dwc/terms/countryCode" class="external-link">Terme DwC</a> : Toujours
+“Canada”</p>
+<p><code>countryCode</code> <a href="http://rs.tdwg.org/dwc/terms/countryCode" class="external-link">Terme DwC</a> : Toujours
+“CA”</p>
+<p><code>continent</code><a href="http://rs.tdwg.org/dwc/terms/continent" class="external-link">Terme DwC</a> : Toujours
+“North America”</p>
+<p><code>eventType</code> <a href="http://rs.tdwg.org/dwc/terms/eventType" class="external-link">Terme DwC</a> : Soit
+“Project” pour la mission ou “Deployment” pour un trait. Voir <a href="https://registry.gbif-uat.org/vocabulary/EventType/concepts" class="external-link">termes</a></p>
+<p><code>minimumDepthInMeters</code> <a href="http://rs.tdwg.org/dwc/terms/minimumDepthInMeters" class="external-link">Terme DwC</a> :
+Ce champ à une corréspondance directe avec l’observation
+<code>min_depth_m</code> du trait dans ANDES.</p>
+<p><code>maximumDepthInMeters</code> <a href="http://rs.tdwg.org/dwc/terms/maximumDepthInMeters" class="external-link">Terme DwC</a> :
+Ce champ à une corréspondance directe avec l’observation
+<code>min_depth_m</code> du trait dans ANDES.</p>
 <p><code>ANDES_SET</code> Numéro du trait selon ANDES, a ne pas
 confondre avec set_id. Ce champ est nécessaire car il est possible avoir
 plusiers traits à la même station. Ce champ à une corréspondance directe
@@ -101,9 +138,25 @@ FAIRE!</p>
 <p><code>occurrenceRemarks</code> Commentaires saisies sur le terrain
 via l’appli Biodiversité. Ce champ à une corréspondance directe avec
 <code>shared_models_catch.notes</code> dans ANDES.</p>
-<p><code>eventRemarks</code> Commentaires saisies sur le terrain via le
-formulaire du trait. Ce champ à une corréspondance directe avec
-<code>shared_models_catch.notes</code> dans ANDES.</p>
+<p><code>eventRemarks</code><a href="https://dwc.tdwg.org/terms/#dwc:eventRemarks" class="external-link">terme DwC</a> :
+Commentaires saisies sur le terrain via le formulaire du trait. Ce champ
+à une corréspondance directe avec <code>shared_models_catch.notes</code>
+dans ANDES.</p>
+<p><code>language</code> <a href="http://purl.org/dc/terms/language" class="external-link">terme DwC</a> : Toujours
+“En”</p>
+<p><code>license</code> <a href="http://purl.org/dc/terms/license" class="external-link">terme
+DwC</a> : Toujours “<a href="http://creativecommons.org/licenses/by/4.0/legalcode" class="external-link uri">http://creativecommons.org/licenses/by/4.0/legalcode</a>”</p>
+<p><code>rightsHolder</code> <a href="http://purl.org/dc/terms/rightsHolder" class="external-link">terme DwC</a> : Toujours
+““His Majesty the King in right of Canada, as represented by the
+Minister of Fisheries and Oceans”</p>
+<p><code>institutionID</code> <a href="http://rs.tdwg.org/dwc/terms/institutionID" class="external-link">terme DwC</a> :
+Toujours “<a href="https://edmo.seadatanet.org/report/4160" class="external-link uri">https://edmo.seadatanet.org/report/4160</a>”</p>
+<p><code>institutionCode</code> <a href="http://rs.tdwg.org/dwc/terms/institutionCode" class="external-link">terme DwC</a> :
+Toujours “IML”</p>
+<p><code>datasetName</code> <a href="http://rs.tdwg.org/dwc/terms/datasetName" class="external-link">terme DwC</a> : Toujours
+vide, doit etre remplis manuellement.</p>
+<p><code>datasetID</code> <a href="http://rs.tdwg.org/dwc/terms/datasetID" class="external-link">terme DwC</a> : Toujours
+vide, doit etre remplis manuellement.</p>
 <div class="section level3">
 <h3 id="les-trois-niveaux-déchantionnage">Les trois niveaux d’échantionnage<a class="anchor" aria-label="anchor" href="#les-trois-niveaux-d%C3%A9chantionnage"></a>
 </h3>
