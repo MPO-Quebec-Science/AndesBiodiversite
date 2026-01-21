@@ -9,11 +9,20 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/reference/andes_db_connect.html</loc></url>
+<url><loc>/reference/dot-calc_nautical_dist.html</loc></url>
+<url><loc>/reference/event_from_fishing_set.html</loc></url>
+<url><loc>/reference/event_from_mission.html</loc></url>
+<url><loc>/reference/get_OBIS_archive.html</loc></url>
+<url><loc>/reference/get_andes_catch.html</loc></url>
+<url><loc>/reference/get_andes_mission.html</loc></url>
+<url><loc>/reference/get_andes_set.html</loc></url>
 <url><loc>/reference/get_biodiv_data.html</loc></url>
-<url><loc>/reference/get_biodiv_data_db.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/linestring_wkt.html</loc></url>
+<url><loc>/reference/make_set_wkt.html</loc></url>
 <url><loc>/reference/obis_datetime_str.html</loc></url>
 <url><loc>/reference/obis_time_str.html</loc></url>
+<url><loc>/reference/occurrence_from_catch.html</loc></url>
 <url><loc>/reference/row_union.html</loc></url>
 </urlset>
 
