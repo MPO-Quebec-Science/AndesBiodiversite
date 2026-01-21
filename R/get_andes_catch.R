@@ -15,6 +15,7 @@ get_andes_catch <- function(andes_db_connection, mission_id = NULL) {
     DBI::dbClearResult(result)
 
     # remove mixed catch?
-    
+    # AND shared_models_referencecatch.is_mixed_catch=0
+
     return(df)
 }

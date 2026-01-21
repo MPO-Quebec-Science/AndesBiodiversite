@@ -19,14 +19,20 @@ andes_db_connection <- andes_db_connect(
   nom_bd = nom_bd
 )
 
+
 devtools::load_all()
+
+
 df <- get_biodiv_data(andes_db_connection)
 write.csv(df, "IML-2024-009-quantitative.csv", row.names = FALSE, na = "")
 
+df_obis <- get_OBIS_archive(andes_db_connection)
 
-obis <- get_OBIS_archive(andes_db_connection)
-write.csv(obis$event, "IML-2024-009-event.csv", row.names = FALSE, na = "")
-write.csv(obis$occurrence, "IML-2024-009-event.csv", row.names = FALSE, na = "")
+write.csv(df_obis$event, "IML-2024-009-event.csv", row.names = FALSE, na = "")
+write.csv(df_obis$occurrence, "IML-2024-009-occurrence.csv", row.names = FALSE, na = "")
+
+
+
 
 # documenter vos changements
 devtools::document()

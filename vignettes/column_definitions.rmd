@@ -45,9 +45,9 @@ Ces derniers utiliseent des lettres majuscules pour les différencier des colonn
 
 `SORTED_MASS` : ($M_\mathrm{sorted}$) Poids des individus TRIÉS d'un espèce.
 
-`FINAL_COUNT` : ($N_\mathrm{final}$) Résultat d'un calcul. Représente le dénombrement et le poids ramené à la capture totale. (calcul= SORTED*MULTIPLICATEUR).
+`FINAL_COUNT` : ($N_\mathrm{final}$) Résultat d'un calcul. Représente le dénombrement et le poids ramené à la capture totale.
 
-`FINAL_MASS` : ($M_\mathrm{final}$)Résultat d'un calcul. Représente le poids ramené à la capture totale. (calcul= SORTED*MULTIPLICATEUR)
+`FINAL_MASS` : ($M_\mathrm{final}$) Résultat d'un calcul. Représente le poids ramené à la capture totale.
 
 `MULTIPLICATEUR` : ($k$) Valeur utilisé pour ramener la fraction du tri de l'espèce à la capture totale.
 

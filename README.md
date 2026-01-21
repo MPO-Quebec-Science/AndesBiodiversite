@@ -21,9 +21,8 @@ List available drivers `using odbc::odbcListDrivers()` and see if it is present.
 
 
 # Utilisation
-1. Donner les détails de la connexion
-2. Établir un connexion
-3. Obtenir les données avec `get_biodiv_data()`
+1. Donner les détails de la connexion et établir un connexion
+2. Obtenir les données avec `get_biodiv_data()` et `get_OBIS_archive()`
 
 
 
@@ -57,6 +56,16 @@ andes_db_connection <- andes_db_connect(
 )
 ```
 
+``` R
+df <- get_biodiv_data(andes_db_connection)
+write.csv(df, "IML-2024-009-quantitative.csv", row.names = FALSE, na = "")
+
+df_obis <- get_OBIS_archive(andes_db_connection)
+write.csv(df_obis$event, "IML-2024-009-event.csv", row.names = FALSE, na = "")
+write.csv(df_obis$occurrence, "IML-2024-009-occurrence.csv", row.names = FALSE, na = "")
+```
+
+
 # Guide developpement
 Pour modifier ce package, il ne faut pas l'installer proprement dit, mais le "loader" à partir du code source (qu'on va vouloir éventuellement modifier).
 
@@ -70,8 +79,8 @@ Pour loader le package avec le code présent sous `./R/` (donc sans installer le
 
 ``` R
 > devtools::load_all()
-ℹ Loading PSEtoDataframe
-> source_info_df <- source_info_list()
+ℹ Loading AndesBiodiversite
+> df <- get_biodiv_data(andes_db_connection)
 ```
 ## Documentation
 
@@ -95,8 +104,8 @@ add <- function(x, y) {
 Utiliser la fonction `devtools::document()` pour mettre a jour la documentation dans `./man/` en utilisant les commentaires `doxygen`
 ``` R
 > devtools::document()
-ℹ Updating PSEtoDataframe documentation
-ℹ Loading PSEtoDataframe
+ℹ Updating AndesBiodiversite documentation
+ℹ Loading AndesBiodiversite
 Writing NAMESPACE
 Writing add.Rd
 ```

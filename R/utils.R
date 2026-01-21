@@ -3,12 +3,13 @@
 #'
 #' @param dt A POSIXct datetime object.
 #' @param precision An integer indicating the precision level (1-7).
-#' @param tz An optional timezone string.
+#' @param tz An optional timezone string. Interpret the passed `dt` in this `tz`, ignoring its embedded timezone
 #' @return A string formatted according to OBIS standards.
 #' @export
 obis_datetime_str <- function(dt, precision = 6, tz = NULL) {
   if (!is.null(tz)) {
-    dt_in_user_timezone <- lubridate::with_tz(dt, tzone = tz)
+    # interpret the passed datetime in EST, ignoring its tz attribute)
+    dt_in_user_timezone <- lubridate::force_tz(dt, tzone = tz)
   } else {
     dt_in_user_timezone <- dt
   }
@@ -25,12 +26,13 @@ obis_datetime_str <- function(dt, precision = 6, tz = NULL) {
   } else if (precision == 6) {
     format_str <- "%Y-%m-%dT%H:%M:%S%z"
   } else if (precision == 7) {
-    format_str <- "%Y-%m-%dT%H:%M:%S.%f%z"
+    # Annoying bug with floating point representation and the lack of rounding in the formatting.
+    # for example, test "2024-06-01 13:14:15.10" vs "2024-06-01 13:14:15.11"
+    format_str <- "%Y-%m-%dT%H:%M:%OS6%z"
   } else {
     stop("Precision not implemented")
   }
-  return(lubridate::format_ISO8601(dt_in_user_timezone, usetz = TRUE, format = format_str)
-)
+  return(format(dt_in_user_timezone, format = format_str))
 }
 
 
@@ -43,7 +45,8 @@ obis_datetime_str <- function(dt, precision = 6, tz = NULL) {
 #' @export
 obis_time_str <- function(dt, precision, tz = NULL) {
   if (!is.null(tz)) {
-    dt_in_user_timezone <- lubridate::with_tz(dt, tzone = tz)
+    # interpret the passed datetime in EST, ignoring its tz attribute)
+    dt_in_user_timezone <- lubridate::force_tz(dt, tzone = tz)
   } else {
     dt_in_user_timezone <- dt
   }
@@ -55,11 +58,13 @@ obis_time_str <- function(dt, precision, tz = NULL) {
   } else if (precision == 6) {
     format_str <- "%H:%M:%S%z"
   } else if (precision == 7) {
-    format_str <- "%H:%M:%S.%f%z"
+    # Annoying bug with floating point representation and the lack of rounding in the formatting.
+    # for example, test "2024-06-01 13:14:15.10" vs "2024-06-01 13:14:15.11"
+    format_str <- "%H:%M:%OS6%z"
   } else {
     stop("Precision not implemented")
   }
-  return(lubridate::format_ISO8601(dt_in_user_timezone, usetz = TRUE, format = format_str))
+  return(format(dt_in_user_timezone, format = format_str))
 }
 
 #' @export
