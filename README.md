@@ -2,6 +2,8 @@
 
 Ce dépot contient des wrappers en `R` de commandes `SQL` pour extraire des données de biodiversité (équipe IML de la région du Québec) fait avec ANDES.
 
+Voir la documentation complète ici: https://mpo-quebec-science.github.io/AndesBiodiversite/
+
 ## Requirements
 The `{MySQL ODBC 8.0 Unicode Driver}` should be available on DFO workstations. It can be installed in the software center.
 Name: MySQL Connector ODBC
@@ -23,7 +25,6 @@ List available drivers `using odbc::odbcListDrivers()` and see if it is present.
 # Utilisation
 1. Donner les détails de la connexion et établir un connexion
 2. Obtenir les données avec `get_biodiv_data()` et `get_OBIS_archive()`
-
 
 
 ## Connexion et authentification a la BD ANDES  

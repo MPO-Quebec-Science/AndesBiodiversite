@@ -1,4 +1,3 @@
-
 #' Convert a datetime to an OBIS-compliant datetime string based on precision
 #'
 #' @param dt A POSIXct datetime object.
@@ -67,25 +66,33 @@ obis_time_str <- function(dt, precision, tz = NULL) {
   return(format(dt_in_user_timezone, format = format_str))
 }
 
+#' Calculate nautical distance between two geographic points
+#' #' This function calculates the great-circle distance between two points on the Earth's surface
+#' #' given their latitude and longitude using the Haversine formula.
+#'
+#' @param p1_lat Latitude of the first point in decimal degrees
+#' @param p1_lon Longitude of the first point in decimal degrees
+#' @param p2_lat Latitude of the second point in decimal degrees
+#' @param p2_lon Longitude of the second point in decimal degrees
+#'
 #' @export
 .calc_nautical_dist <- function(p1_lat, p1_lon, p2_lat, p2_lon) {
   # Haversine formula
-  R <- 6371  # Earth radius in km
+  R <- 6371 # Earth radius in km
   delta_lat <- (p2_lat - p1_lat) * (pi / 180)
   delta_lon <- (p2_lon - p1_lon) * (pi / 180)
   a <- sin(delta_lat / 2) * sin(delta_lat / 2) +
     cos(p1_lat * (pi / 180)) * cos(p2_lat * (pi / 180)) *
-    sin(delta_lon / 2) * sin(delta_lon / 2)
+      sin(delta_lon / 2) * sin(delta_lon / 2)
   c <- 2 * atan2(sqrt(a), sqrt(1 - a))
   distance_km <- R * c
   distance_nautical_miles <- distance_km / 1.852
   return(distance_nautical_miles)
-
 }
 
 #' rbind, but allow different columns names
 #' Make a union of the rows filling missing columns with NA
-#' 
+#'
 #'  https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns
 row_union <- function(df1, df2) {
   # special case when the first df is NULL

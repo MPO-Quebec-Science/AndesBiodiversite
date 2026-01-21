@@ -11,7 +11,7 @@ obis_datetime_str(dt, precision = 6, tz = NULL)
 
 \item{precision}{An integer indicating the precision level (1-7).}
 
-\item{tz}{An optional timezone string.}
+\item{tz}{An optional timezone string. Interpret the passed `dt` in this `tz`, ignoring its embedded timezone}
 }
 \value{
 A string formatted according to OBIS standards.

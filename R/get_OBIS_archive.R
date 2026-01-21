@@ -1,4 +1,11 @@
 
+#' Extract OBIS archive from ANDES database
+#'
+#' This function extracts data from an ANDES database connection and formats it into OBIS-compliant occurrence and event tables.
+#'
+#' @param andes_db_connection a connection object to the ANDES database.
+#' @return A dataframe containing the OBIS data. Use `$occurrence` and `$event` to access the respective tables.  
+#' @export
 get_OBIS_archive <- function(andes_db_connection) {
 
     andes_mission <- get_andes_mission(andes_db_connection)

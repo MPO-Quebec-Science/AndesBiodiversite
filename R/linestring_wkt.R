@@ -1,5 +1,13 @@
-# defing this here instead of using the package sf to avoid dependency
-# If we ever import sf or wellknown, we can replace this function
+#' Create a WKT linestring from two points
+#' This function creates a WKT (Well-Known Text) representation of a linestring
+#' connecting two points. Each point is represented as a list containing 'lon' and 'lat' fields,
+#' and optionally a 'z' field for elevation (a negative number representing depth).
+#' 
+#' @param p1 A list with 'lon' and 'lat' (and optionally 'z') fields for the first point
+#' @param p2 A list with 'lon' and 'lat' (and optionally 'z') fields for the second point
+#'
+#' defing this here instead of using the package sf to avoid dependency
+#' If we ever import sf or wellknown, we can replace this function
 #' @export
 linestring_wkt <- function(p1, p2, fmt = 3) {
     wkt_string <-  "LINESTRING EMPTY"
@@ -19,6 +27,8 @@ linestring_wkt <- function(p1, p2, fmt = 3) {
                 p2$lon, p2$lat
             )
         }
+    } else {
+        warning("points must have 'lon' and 'lat' fields")
     }
     return(wkt_string)
 }

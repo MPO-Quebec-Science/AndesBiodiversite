@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_biodiv_data.R
 \name{get_biodiv_data}
 \alias{get_biodiv_data}
-\title{Gets get_biodiv_data (raw database results)}
+\title{Gets biodiversity data from ANDES database}
 \usage{
 get_biodiv_data(andes_db_connection)
 }
@@ -10,12 +10,19 @@ get_biodiv_data(andes_db_connection)
 \item{andes_db_connection}{a connection object to the ANDES database.}
 }
 \value{
-A dataframe containing the biodiversity data set data.
+a dataframe containing andes biodiveristy data
 }
 \description{
-This function executes a SQL query to retrieve the needed andes data to construct the Biodiversity table.
+This function executes a SQL query to retrieve the needed andes data to construct a Biodiversity table.
+TODO: The mission filter is not yet implemented everywhere, but should be added in the future. It currently uses the active mission 
 The current ANDES active mission will determine for which mission the data are returned.
 }
 \seealso{
-[get_biodiv_data_db()] for the formatted results
+[andes_db_connect()] for getting a connection object to the ANDES database.
+
+Other {Andesdb query functions}: 
+\code{\link{get_andes_catch}()},
+\code{\link{get_andes_mission}()},
+\code{\link{get_andes_set}()}
 }
+\concept{{Andesdb query functions}}

@@ -1,42 +1,29 @@
-#' Gets get_biodiv_data_db (raw database results)
+
+#' Gets biodiversity data from ANDES database
 #'
-#' This function executes a SQL query to retrieve the needed andes data to construct the Biodiversity table.
+#' This function executes a SQL query to retrieve the needed andes data to construct a Biodiversity table.
+#' TODO: The mission filter is not yet implemented everywhere, but should be added in the future. It currently uses the active mission 
 #' The current ANDES active mission will determine for which mission the data are returned.
 #'
-#' This function is intended for internal use and returns raw results from the database.
-#' It is not meant for direct use in analysis or reporting. Users should use `get_biodiv_data`
-#'
 #' @param andes_db_connection a connection object to the ANDES database.
-#' @return A dataframe containing the biodiversity data set data.
-#' @seealso [get_capture_mollusque()] for the formatted results
+#' 
+#' @return a dataframe containing andes biodiveristy data
+#' @seealso [andes_db_connect()] for getting a connection object to the ANDES database.
+#' @family {Andesdb query functions}
 #' @export
-get_biodiv_data_db <- function(andes_db_connection) {
-    # query <- readr::read_file(system.file("sql_queries",
-    #                                       "biodiv_data.sql",
-    #                                       package = "AndesBiodiversite"))
-    query <- readr::read_file("inst/sql_queries/biodiv_data.sql")
+get_biodiv_data <- function(andes_db_connection) {
+
+    query <- readr::read_file(system.file("sql_queries",
+                                          "biodiv_data.sql",
+                                          package = "AndesBiodiversite"))
 
     # add mission filter
     # use the active misison, one day you can choose a different mission,
     # query <- paste(query, "WHERE shared_models_mission.is_active=1")
 
     result <- DBI::dbSendQuery(andes_db_connection, query)
-    df <- DBI::dbFetch(result, n = Inf)
+    biodiv_data <- DBI::dbFetch(result, n = Inf)
     DBI::dbClearResult(result)
-    return(df)
-}
-
-#' Gets get_biodiv_data (raw database results)
-#'
-#' This function executes a SQL query to retrieve the needed andes data to construct the Biodiversity table.
-#' The current ANDES active mission will determine for which mission the data are returned.
-#'
-#' @param andes_db_connection a connection object to the ANDES database.
-#' @return A dataframe containing the biodiversity data set data.
-#' @seealso [get_biodiv_data_db()] for the formatted results
-#' @export
-get_biodiv_data <- function(andes_db_connection) {
-    biodiv_data <- get_biodiv_data_db(andes_db_connection)
 
     # there are catches that are for the commercial survey,
     # normally they can be weeded out by filtering using the basket class
