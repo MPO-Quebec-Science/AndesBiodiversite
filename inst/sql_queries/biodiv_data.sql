@@ -6,7 +6,6 @@ SELECT
     shared_models_sample.remarks AS eventRemarks,
     shared_models_station.name AS fieldNumber, -- need to make the eventID
     shared_models_mission.mission_number AS mission, -- need to make the eventID
-    shared_models_catch.id AS recordNumber,
     shared_models_relativeabundancecategory.description_eng AS REL_ABUNDANCE_DESC,
     shared_models_relativeabundancecategory.code AS REL_ABUNDANCE_CODE,
 	shared_models_catch.notes AS occurrenceRemarks,
@@ -46,7 +45,6 @@ GROUP BY
     eventRemarks,
     fieldNumber,
     mission,
-    recordNumber,
     REL_ABUNDANCE_DESC,
     REL_ABUNDANCE_CODE,
     occurrenceRemarks,

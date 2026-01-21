@@ -1,5 +1,5 @@
 ---
-title: "Format des données quantitatives"
+title: "Format des données"
 output: rmarkdown::html_document
 nocite: '@*'
 ---
@@ -11,13 +11,26 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Définitions des variables.
 
+# Données qualitative OBIS
+Une archive darwin-core (DwCA) contenant uniquement les informations d'occurrences.
+La fonction `get_OBIS_archive()` produit les tables `event` et `occurrence` qui forment ensemble une archive Event-Core.
+
+Ces deux tables sont conformes au standard DarwinCore et pourrait être importées dans OBIS via l'outil [OBIS IPT](https://obis.org/data/ipt/).
+Certains colonnes doivent être remplies manuellement dans l'archive OBIS avant l'importation, comme `datasetName` et `datasetID`.
+
+# Données quantitatives de biodiversité
+La fonction `get_biodiv_data()` produit un jeu de données ayant des données quantitative (poids et dénombrement).
 Un éffort a été fait pour aligner les colonnes des données avec le standard DarwinCore.
 Cependant, certaines colonnes spécifiques à l'étude ont été ajoutées.
 Ces derniers utiliseent des lettres majuscules pour les différencier des colonnes DarwinCore.
 
-`eventID` [Terme DwC]("http://rs.tdwg.org/dwc/terms/eventID") : L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number`, `shared_models_station.name` et ``shared_models_sample.sample_number``. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie.
+Les champs `eventID` `recordNumber` peuvent être utilisés pour faire le lien avec les tables du DwCA OBIS.
+Ces liens semi-relationnels permettent d'associer les données quantitatives aux occurrences/evenements OBIS.
+
+# Définitions des variables.
+
+`eventID` [Terme DwC]("http://rs.tdwg.org/dwc/terms/eventID") : L'identifiant de l'événement d'échantionnage. Ce champ est composé de `shared_models_mission.mission_number`, `shared_models_station.name` et ``shared_models_sample.sample_number``. Avec l'unique exception de l'ajout de `16F` et `16E` pour les missions pétonlce Minganie. Ce terme aparrait à la fois dans les tables DwCA OBIS et dans la table de données quantitative permettant ainsi de faire un pont (semi-relationel).
 
 `fieldNumber` [Term DwC](http://rs.tdwg.org/dwc/terms/fieldNumber) : Nom de la station. Ce champ à une corréspondance directe avec `shared_models_station.name` dans ANDES.
 
@@ -49,11 +62,11 @@ Ces derniers utiliseent des lettres majuscules pour les différencier des colonn
 
 `ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id. Ce champ est nécessaire car il est possible avoir plusiers traits à la même station. Ce champ à une corréspondance directe avec `shared_models_sample.sample_number` dans ANDES.
 
-`recordNumber` ID de l'occurrence dans ANDES. Ce champ à une corréspondance directe avec `shared_models_catch.id` dans ANDES.
+`recordNumber` [Terme DwC](http://rs.tdwg.org/dwc/terms/recordNumber) : Identification de l'occurrence dans ANDES. Ce champ à une corréspondance directe avec `shared_models_catch.id` dans ANDES. Ce terme aparrait à la fois dans la table d'occurence OBIS et dans la table de données quantitative permettant ainsi de faire un pont (semi-relationel).
 
-`scientificName` Term DwC. Nom scientifique de l'espèce. Ce champ à une corréspondance directe avec `shared_models_referencecatch.scientific_name` dans ANDES.
+`scientificName` [Terme DwC](http://rs.tdwg.org/dwc/terms/recordNumber) : Nom scientifique de l'espèce. Ce champ à une corréspondance directe avec `shared_models_referencecatch.scientific_name` dans ANDES.
 
-`scientificNameID` Term DwC.Sous la forme urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce champ à une corréspondance directe avec `shared_models_referencecatch.aphia_id` dans ANDES.
+`scientificNameID` Term DwC. Sous la forme `urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx` est le `AphiaID`. Ce dernier (le `AphiaID`) ayant à une corréspondance directe avec `shared_models_referencecatch.aphia_id` dans ANDES.
 
 `ech_congelo`: `materialEntityType` OU `preparation` on hésite entre ces deux termes darwinCore. A FAIRE!
 

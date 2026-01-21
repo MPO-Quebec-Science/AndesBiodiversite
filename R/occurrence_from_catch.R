@@ -37,6 +37,8 @@ occurrence_from_catch <- function(catch, event = NULL, quiet = FALSE) {
     catch$aphia_id
   )
 
+  occurrence$recordNumber <- catch$catch_id
+
   occurrence$occurrenceRemarks <- catch$notes
 
   return(occurrence)
