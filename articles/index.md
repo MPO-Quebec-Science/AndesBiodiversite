@@ -2,4 +2,4 @@
 
 ### All vignettes
 
-- [Format des données quantitatives](column_definitions.md):
+- [Format des données](column_definitions.md):

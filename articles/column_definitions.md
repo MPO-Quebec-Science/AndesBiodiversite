@@ -1,17 +1,41 @@
-# Format des données quantitatives
+# Format des données
+
+## Données qualitative OBIS
+
+Une archive darwin-core (DwCA) contenant uniquement les informations
+d’occurrences. La fonction
+[`get_OBIS_archive()`](../reference/get_OBIS_archive.md) produit les
+tables `event` et `occurrence` qui forment ensemble une archive
+Event-Core.
+
+Ces deux tables sont conformes au standard DarwinCore et pourrait être
+importées dans OBIS via l’outil [OBIS IPT](https://obis.org/data/ipt/).
+Certains colonnes doivent être remplies manuellement dans l’archive OBIS
+avant l’importation, comme `datasetName` et `datasetID`.
+
+## Données quantitatives de biodiversité
+
+La fonction [`get_biodiv_data()`](../reference/get_biodiv_data.md)
+produit un jeu de données ayant des données quantitative (soit poids et
+dénombrement). Un éffort a été fait pour aligner les colonnes des
+données avec le standard DarwinCore. Cependant, certaines colonnes
+spécifiques à l’étude ont été ajoutées. Ces derniers utilisent des
+lettres majuscules pour les différencier des colonnes DarwinCore.
+
+Les champs `eventID` (table event) et `recordNumber` (table occurence)
+peuvent être utilisés pour faire le lien avec les tables du DwCA OBIS.
+Ces liens semi-relationnels permettent d’associer les données
+quantitatives aux occurrences/evenements OBIS.
 
 ## Définitions des variables.
-
-Un éffort a été fait pour aligner les colonnes des données avec le
-standard DarwinCore. Cependant, certaines colonnes spécifiques à l’étude
-ont été ajoutées. Ces derniers utiliseent des lettres majuscules pour
-les différencier des colonnes DarwinCore.
 
 `eventID` [Terme DwC](%22http://rs.tdwg.org/dwc/terms/eventID%22) :
 L’identifiant de l’événement d’échantionnage. Ce champ est composé de
 `shared_models_mission.mission_number`, `shared_models_station.name` et
 `shared_models_sample.sample_number`. Avec l’unique exception de l’ajout
-de `16F` et `16E` pour les missions pétonlce Minganie.
+de `16F` et `16E` pour les missions pétonlce Minganie. Ce terme aparrait
+à la fois dans les tables DwCA OBIS et dans la table de données
+quantitative permettant ainsi de faire un pont (semi-relationel).
 
 `fieldNumber` [Term DwC](http://rs.tdwg.org/dwc/terms/fieldNumber) : Nom
 de la station. Ce champ à une corréspondance directe avec
@@ -72,29 +96,34 @@ DwC](http://rs.tdwg.org/dwc/terms/maximumDepthInMeters) : Ce champ à une
 corréspondance directe avec l’observation `min_depth_m` du trait dans
 ANDES.
 
-`ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec set_id.
-Ce champ est nécessaire car il est possible avoir plusiers traits à la
-même station. Ce champ à une corréspondance directe avec
+`ANDES_SET` Numéro du trait selon ANDES, a ne pas confondre avec
+`set_id`. Ce champ est nécessaire car il est possible avoir plusiers
+traits à la même station. Ce champ à une corréspondance directe avec
 `shared_models_sample.sample_number` dans ANDES.
 
-`recordNumber` ID de l’occurrence dans ANDES. Ce champ à une
-corréspondance directe avec `shared_models_catch.id` dans ANDES.
+`recordNumber` [Terme DwC](http://rs.tdwg.org/dwc/terms/recordNumber) :
+Identification de l’occurrence dans ANDES. Ce champ à une corréspondance
+directe avec `shared_models_catch.id` dans ANDES. Ce terme aparrait à la
+fois dans la table d’occurence OBIS et dans la table de données
+quantitative permettant ainsi de faire un pont (semi-relationel).
 
-`scientificName` Term DwC. Nom scientifique de l’espèce. Ce champ à une
-corréspondance directe avec
-`shared_models_referencecatch.scientific_name` dans ANDES.
+`scientificName` [Terme DwC](http://rs.tdwg.org/dwc/terms/recordNumber)
+: Nom scientifique de l’espèce. Ce champ à une corréspondance directe
+avec `shared_models_referencecatch.scientific_name` dans ANDES.
 
-`scientificNameID` Term DwC.Sous la forme
-urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce
-champ à une corréspondance directe avec
-`shared_models_referencecatch.aphia_id` dans ANDES.
+`scientificNameID` [Terme
+DwC](http://rs.tdwg.org/dwc/terms/scientificNameID) : Sous la forme
+`urn.lsid:marinespecies.org:taxname:xxxxxx` où `xxxxxx` est le
+`AphiaID`. Ce dernier (le `AphiaID`) ayant à une corréspondance directe
+avec `shared_models_referencecatch.aphia_id` dans ANDES.
 
 `ech_congelo`: `materialEntityType` OU `preparation` on hésite entre ces
 deux termes darwinCore. A FAIRE!
 
-`occurrenceRemarks` Commentaires saisies sur le terrain via l’appli
-Biodiversité. Ce champ à une corréspondance directe avec
-`shared_models_catch.notes` dans ANDES.
+`occurrenceRemarks` [terme
+DwC](http://rs.tdwg.org/dwc/terms/occurrenceRemarks) : Commentaires
+saisies sur le terrain via l’appli Biodiversité. Ce champ à une
+corréspondance directe avec `shared_models_catch.notes` dans ANDES.
 
 `eventRemarks`[terme DwC](https://dwc.tdwg.org/terms/#dwc:eventRemarks)
 : Commentaires saisies sur le terrain via le formulaire du trait. Ce
@@ -123,7 +152,7 @@ Toujours vide, doit etre remplis manuellement.
 `datasetID` [terme DwC](http://rs.tdwg.org/dwc/terms/datasetID) :
 Toujours vide, doit etre remplis manuellement.
 
-### Les trois niveaux d’échantionnage
+### Données quantitatives, les trois niveaux d’échantionnage
 
 `SUBSAMPLE_COUNT` : ($N_{subsampled}$) Dénombrement des individu
 prélevés pour un sous-échantillon lorsque la quantité total de cette
@@ -182,16 +211,16 @@ $$M_{sorted} = M_{subsampled}\frac{N_{sorted}}{N_{subsampled}}.$$
 
 Les trois niveaux
 
-### Cote d’abondance relative
+### Données semi-quantitatives, côte d’abondance relative
 
 Les colonnes suivantes décrivent la cote d’abondance relative assignée à
 chaque espèce capturée lors d’un trait.
 
-`REL_ABUNDANCE_CODE` Code (1,2,3) pour la cote d’abondance relative. Ce
-champ à une corréspondance directe avec
+`REL_ABUNDANCE_CODE` : Code (1,2,3) pour la cote d’abondance relative.
+Ce champ à une corréspondance directe avec
 `shared_models_relativeabundancecategory.code` dans ANDES.
 
-`REL_ABUNDANCE_DESC` Description (anglais) de la cote d’abondance
+`REL_ABUNDANCE_DESC` : Description (anglais) de la cote d’abondance
 relative. Ce champ à une corréspondance directe avec
 `shared_models_relativeabundancecategory.description_eng` dans ANDES.
 

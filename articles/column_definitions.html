@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Format des données quantitatives • AndesBiodiversite</title>
+<title>Format des données • AndesBiodiversite</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Format des données quantitatives">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Format des données">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -33,7 +33,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/column_definitions.html">Format des données quantitatives</a></li>
+<li><a class="dropdown-item" href="../articles/column_definitions.html">Format des données</a></li>
   </ul>
 </li>
       </ul>
@@ -54,7 +54,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Format des données quantitatives</h1>
+      <h1>Format des données</h1>
             
       
 
@@ -64,19 +64,45 @@
     
     
 <div class="section level2">
+<h2 id="données-qualitative-obis">Données qualitative OBIS<a class="anchor" aria-label="anchor" href="#donn%C3%A9es-qualitative-obis"></a>
+</h2>
+<p>Une archive darwin-core (DwCA) contenant uniquement les informations
+d’occurrences. La fonction <code><a href="../reference/get_OBIS_archive.html">get_OBIS_archive()</a></code> produit les
+tables <code>event</code> et <code>occurrence</code> qui forment
+ensemble une archive Event-Core.</p>
+<p>Ces deux tables sont conformes au standard DarwinCore et pourrait
+être importées dans OBIS via l’outil <a href="https://obis.org/data/ipt/" class="external-link">OBIS IPT</a>. Certains colonnes
+doivent être remplies manuellement dans l’archive OBIS avant
+l’importation, comme <code>datasetName</code> et
+<code>datasetID</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="données-quantitatives-de-biodiversité">Données quantitatives de biodiversité<a class="anchor" aria-label="anchor" href="#donn%C3%A9es-quantitatives-de-biodiversit%C3%A9"></a>
+</h2>
+<p>La fonction <code><a href="../reference/get_biodiv_data.html">get_biodiv_data()</a></code> produit un jeu de données
+ayant des données quantitative (soit poids et dénombrement). Un éffort a
+été fait pour aligner les colonnes des données avec le standard
+DarwinCore. Cependant, certaines colonnes spécifiques à l’étude ont été
+ajoutées. Ces derniers utilisent des lettres majuscules pour les
+différencier des colonnes DarwinCore.</p>
+<p>Les champs <code>eventID</code> (table event) et
+<code>recordNumber</code> (table occurence) peuvent être utilisés pour
+faire le lien avec les tables du DwCA OBIS. Ces liens semi-relationnels
+permettent d’associer les données quantitatives aux
+occurrences/evenements OBIS.</p>
+</div>
+<div class="section level2">
 <h2 id="définitions-des-variables-">Définitions des variables.<a class="anchor" aria-label="anchor" href="#d%C3%A9finitions-des-variables-"></a>
 </h2>
-<p>Un éffort a été fait pour aligner les colonnes des données avec le
-standard DarwinCore. Cependant, certaines colonnes spécifiques à l’étude
-ont été ajoutées. Ces derniers utiliseent des lettres majuscules pour
-les différencier des colonnes DarwinCore.</p>
 <p><code>eventID</code> <a href="%22http://rs.tdwg.org/dwc/terms/eventID%22" class="external-link">Terme DwC</a> :
 L’identifiant de l’événement d’échantionnage. Ce champ est composé de
 <code>shared_models_mission.mission_number</code>,
 <code>shared_models_station.name</code> et
 <code>shared_models_sample.sample_number</code>. Avec l’unique exception
 de l’ajout de <code>16F</code> et <code>16E</code> pour les missions
-pétonlce Minganie.</p>
+pétonlce Minganie. Ce terme aparrait à la fois dans les tables DwCA OBIS
+et dans la table de données quantitative permettant ainsi de faire un
+pont (semi-relationel).</p>
 <p><code>fieldNumber</code> <a href="http://rs.tdwg.org/dwc/terms/fieldNumber" class="external-link">Term DwC</a> : Nom de la
 station. Ce champ à une corréspondance directe avec
 <code>shared_models_station.name</code> dans ANDES.</p>
@@ -118,26 +144,32 @@ Ce champ à une corréspondance directe avec l’observation
 Ce champ à une corréspondance directe avec l’observation
 <code>min_depth_m</code> du trait dans ANDES.</p>
 <p><code>ANDES_SET</code> Numéro du trait selon ANDES, a ne pas
-confondre avec set_id. Ce champ est nécessaire car il est possible avoir
-plusiers traits à la même station. Ce champ à une corréspondance directe
-avec <code>shared_models_sample.sample_number</code> dans ANDES.</p>
-<p><code>recordNumber</code> ID de l’occurrence dans ANDES. Ce champ à
-une corréspondance directe avec <code>shared_models_catch.id</code> dans
-ANDES.</p>
-<p><code>scientificName</code> Term DwC. Nom scientifique de l’espèce.
-Ce champ à une corréspondance directe avec
+confondre avec <code>set_id</code>. Ce champ est nécessaire car il est
+possible avoir plusiers traits à la même station. Ce champ à une
+corréspondance directe avec
+<code>shared_models_sample.sample_number</code> dans ANDES.</p>
+<p><code>recordNumber</code> <a href="http://rs.tdwg.org/dwc/terms/recordNumber" class="external-link">Terme DwC</a> :
+Identification de l’occurrence dans ANDES. Ce champ à une corréspondance
+directe avec <code>shared_models_catch.id</code> dans ANDES. Ce terme
+aparrait à la fois dans la table d’occurence OBIS et dans la table de
+données quantitative permettant ainsi de faire un pont
+(semi-relationel).</p>
+<p><code>scientificName</code> <a href="http://rs.tdwg.org/dwc/terms/recordNumber" class="external-link">Terme DwC</a> : Nom
+scientifique de l’espèce. Ce champ à une corréspondance directe avec
 <code>shared_models_referencecatch.scientific_name</code> dans
 ANDES.</p>
-<p><code>scientificNameID</code> Term DwC.Sous la forme
-urn.lsid:marinespecies.org:taxname:xxxxxx où xxxxxx est le AphiaID. Ce
-champ à une corréspondance directe avec
+<p><code>scientificNameID</code> <a href="http://rs.tdwg.org/dwc/terms/scientificNameID" class="external-link">Terme DwC</a> :
+Sous la forme <code>urn.lsid:marinespecies.org:taxname:xxxxxx</code> où
+<code>xxxxxx</code> est le <code>AphiaID</code>. Ce dernier (le
+<code>AphiaID</code>) ayant à une corréspondance directe avec
 <code>shared_models_referencecatch.aphia_id</code> dans ANDES.</p>
 <p><code>ech_congelo</code>: <code>materialEntityType</code> OU
 <code>preparation</code> on hésite entre ces deux termes darwinCore. A
 FAIRE!</p>
-<p><code>occurrenceRemarks</code> Commentaires saisies sur le terrain
-via l’appli Biodiversité. Ce champ à une corréspondance directe avec
-<code>shared_models_catch.notes</code> dans ANDES.</p>
+<p><code>occurrenceRemarks</code> <a href="http://rs.tdwg.org/dwc/terms/occurrenceRemarks" class="external-link">terme DwC</a> :
+Commentaires saisies sur le terrain via l’appli Biodiversité. Ce champ à
+une corréspondance directe avec <code>shared_models_catch.notes</code>
+dans ANDES.</p>
 <p><code>eventRemarks</code><a href="https://dwc.tdwg.org/terms/#dwc:eventRemarks" class="external-link">terme DwC</a> :
 Commentaires saisies sur le terrain via le formulaire du trait. Ce champ
 à une corréspondance directe avec <code>shared_models_catch.notes</code>
@@ -158,7 +190,7 @@ vide, doit etre remplis manuellement.</p>
 <p><code>datasetID</code> <a href="http://rs.tdwg.org/dwc/terms/datasetID" class="external-link">terme DwC</a> : Toujours
 vide, doit etre remplis manuellement.</p>
 <div class="section level3">
-<h3 id="les-trois-niveaux-déchantionnage">Les trois niveaux d’échantionnage<a class="anchor" aria-label="anchor" href="#les-trois-niveaux-d%C3%A9chantionnage"></a>
+<h3 id="données-quantitatives-les-trois-niveaux-déchantionnage">Données quantitatives, les trois niveaux d’échantionnage<a class="anchor" aria-label="anchor" href="#donn%C3%A9es-quantitatives-les-trois-niveaux-d%C3%A9chantionnage"></a>
 </h3>
 <p><code>SUBSAMPLE_COUNT</code> :
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>N</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">u</mi><mi mathvariant="normal">b</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">m</mi><mi mathvariant="normal">p</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi><mi mathvariant="normal">d</mi></mrow></msub><annotation encoding="application/x-tex">N_\mathrm{subsampled}</annotation></semantics></math>)
@@ -246,15 +278,15 @@ M_\mathrm{sorted} = M_\mathrm{subsampled} \frac{N_\mathrm{sorted}}{N_\mathrm{sub
 </div>
 </div>
 <div class="section level3">
-<h3 id="cote-dabondance-relative">Cote d’abondance relative<a class="anchor" aria-label="anchor" href="#cote-dabondance-relative"></a>
+<h3 id="données-semi-quantitatives-côte-dabondance-relative">Données semi-quantitatives, côte d’abondance relative<a class="anchor" aria-label="anchor" href="#donn%C3%A9es-semi-quantitatives-c%C3%B4te-dabondance-relative"></a>
 </h3>
 <p>Les colonnes suivantes décrivent la cote d’abondance relative
 assignée à chaque espèce capturée lors d’un trait.</p>
-<p><code>REL_ABUNDANCE_CODE</code> Code (1,2,3) pour la cote d’abondance
-relative. Ce champ à une corréspondance directe avec
+<p><code>REL_ABUNDANCE_CODE</code> : Code (1,2,3) pour la cote
+d’abondance relative. Ce champ à une corréspondance directe avec
 <code>shared_models_relativeabundancecategory.code</code> dans
 ANDES.</p>
-<p><code>REL_ABUNDANCE_DESC</code> Description (anglais) de la cote
+<p><code>REL_ABUNDANCE_DESC</code> : Description (anglais) de la cote
 d’abondance relative. Ce champ à une corréspondance directe avec
 <code>shared_models_relativeabundancecategory.description_eng</code>
 dans ANDES.</p>
