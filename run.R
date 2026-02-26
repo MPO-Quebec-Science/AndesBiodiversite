@@ -29,9 +29,12 @@ write.csv(df, "IML-2024-009-quantitative.csv", row.names = FALSE, na = "")
 df_obis <- get_OBIS_archive(andes_db_connection)
 
 write.csv(df_obis$event, "IML-2024-009-event.csv", row.names = FALSE, na = "")
-write.csv(df_obis$occurrence, "IML-2024-009-occurrence.csv", row.names = FALSE, na = "")
-
-
+write.csv(
+  df_obis$occurrence,
+  "IML-2024-009-occurrence.csv",
+  row.names = FALSE,
+  na = ""
+)
 
 
 # documenter vos changements
@@ -46,7 +49,10 @@ devtools::test()
 devtools::run_examples()
 
 # tester le package
-rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-examples"), error_on = "error")
+rcmdcheck::rcmdcheck(
+  args = c("--no-manual", "--no-examples"),
+  error_on = "error"
+)
 
 # contruire la documentation avec pkgdown
 pkgdown::build_site()

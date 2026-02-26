@@ -81,9 +81,12 @@ obis_time_str <- function(dt, precision, tz = NULL) {
   R <- 6371 # Earth radius in km
   delta_lat <- (p2_lat - p1_lat) * (pi / 180)
   delta_lon <- (p2_lon - p1_lon) * (pi / 180)
-  a <- sin(delta_lat / 2) * sin(delta_lat / 2) +
-    cos(p1_lat * (pi / 180)) * cos(p2_lat * (pi / 180)) *
-      sin(delta_lon / 2) * sin(delta_lon / 2)
+  a <- sin(delta_lat / 2) *
+    sin(delta_lat / 2) +
+    cos(p1_lat * (pi / 180)) *
+      cos(p2_lat * (pi / 180)) *
+      sin(delta_lon / 2) *
+      sin(delta_lon / 2)
   c <- 2 * atan2(sqrt(a), sqrt(1 - a))
   distance_km <- R * c
   distance_nautical_miles <- distance_km / 1.852

@@ -24,7 +24,12 @@ event_from_fishing_set <- function(set, parent_event = NULL, quiet = FALSE) {
 
   event <- list()
   class(event) <- c("OBISEvent")
-  event$eventID <- paste(parent_event$eventID, set$station_name, set$sample_number, sep = "-")
+  event$eventID <- paste(
+    parent_event$eventID,
+    set$station_name,
+    set$sample_number,
+    sep = "-"
+  )
   event$parentEventID <- parent_event$eventID
 
   event$start_dt <- obis_datetime_str(set$start_date, precision = 6)
@@ -35,23 +40,33 @@ event_from_fishing_set <- function(set, parent_event = NULL, quiet = FALSE) {
   event$decimalLatitude <- 0.5 * (set$start_latitude + set$end_latitude)
   event$decimalLongitude <- 0.5 * (set$start_longitude + set$end_longitude)
   # use half of great-circle distance (converted to metres)
-  coordinateUncertaintyInMeters <- 1852 * 0.5 * .calc_nautical_dist(
-    p1_lat = set$start_latitude,
-    p1_lon = set$start_longitude,
-    p2_lat = set$end_latitude,
-    p2_lon = set$end_longitude
-  )
-
-  event$coordinateUncertaintyInMeters <- round(coordinateUncertaintyInMeters, digits = 3)
-
-  if (is.numeric(event$decimalLatitude) & is.numeric(event$decimalLongitude)){
-    coordinateUncertaintyInMeters <- 1852 * 0.5 * .calc_nautical_dist(
+  coordinateUncertaintyInMeters <- 1852 *
+    0.5 *
+    .calc_nautical_dist(
       p1_lat = set$start_latitude,
       p1_lon = set$start_longitude,
       p2_lat = set$end_latitude,
       p2_lon = set$end_longitude
     )
-    event$coordinateUncertaintyInMeters <- round(coordinateUncertaintyInMeters, digits = 3)
+
+  event$coordinateUncertaintyInMeters <- round(
+    coordinateUncertaintyInMeters,
+    digits = 3
+  )
+
+  if (is.numeric(event$decimalLatitude) & is.numeric(event$decimalLongitude)) {
+    coordinateUncertaintyInMeters <- 1852 *
+      0.5 *
+      .calc_nautical_dist(
+        p1_lat = set$start_latitude,
+        p1_lon = set$start_longitude,
+        p2_lat = set$end_latitude,
+        p2_lon = set$end_longitude
+      )
+    event$coordinateUncertaintyInMeters <- round(
+      coordinateUncertaintyInMeters,
+      digits = 3
+    )
     event$geodeticDatum <- "epsg:4326"
   } else {
     event$coordinateUncertaintyInMeters <- NA
@@ -66,7 +81,6 @@ event_from_fishing_set <- function(set, parent_event = NULL, quiet = FALSE) {
   set_remarks <- gsub("[\r\n]", " ", set_remarks)
   event$eventRemarks <- set_remarks
 
-
   event$footprintWKT <- make_set_wkt(set)
   if (!is.null(event$footprintWKT)) {
     event$footprintSRS <- "epsg:4326"
@@ -74,13 +88,10 @@ event_from_fishing_set <- function(set, parent_event = NULL, quiet = FALSE) {
     event$footprintSRS <- NA
   }
 
-
-
   event$fieldNumber <- set$station_name
 
   event$maximumDepthInMeters <- as.numeric(set$max_depth_m)
   event$minimumDepthInMeters <- as.numeric(set$min_depth_m)
-
 
   # hard-coded values
   # event$eventType <- "SiteVisit" # https://registry.gbif-uat.org/vocabulary/EventType/concepts

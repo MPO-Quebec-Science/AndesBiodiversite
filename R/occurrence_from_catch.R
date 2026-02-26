@@ -12,7 +12,12 @@
 #' @export
 occurrence_from_catch <- function(catch, event = NULL, quiet = FALSE) {
   if (quiet == FALSE) {
-    message("creating occurence from catch : ", catch$catch_id, " ", event$eventID)
+    message(
+      "creating occurence from catch : ",
+      catch$catch_id,
+      " ",
+      event$eventID
+    )
   }
   if (is.null(event)) {
     stop("An event must be provided to create an occurrence")
