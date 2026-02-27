@@ -1,6 +1,6 @@
 # ANDES Biodiversité
 
-[![Docs](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg)](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml)
+[![R-CMD-check](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml)
 
 Ce dépot contient des wrappers en `R` de commandes `SQL` pour extraire
 des données de biodiversité (équipe IML de la région du Québec) fait
@@ -25,7 +25,8 @@ Nom: `MySQL Connector ODBC` Version `8.0.22` URL:
 `softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539`
 
 Une fois le pilote installé, essayez la commande
-`odbc::odbcListDrivers()` pour confirmé sa présence.
+[`odbc::odbcListDrivers()`](https://odbc.r-dbi.org/reference/odbcListDrivers.html)
+pour confirmé sa présence.
 
 # Utilisation
 

@@ -53,7 +53,9 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="andes-biodiversité">ANDES Biodiversité<a class="anchor" aria-label="anchor" href="#andes-biodiversit%C3%A9"></a>
 </h1></div>
-<p><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg" alt="Docs"></a></p>
+<!-- badges: start -->
+
+<p><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <!-- badges: end --></p>
 <p>Ce dépot contient des wrappers en <code>R</code> de commandes <code>SQL</code> pour extraire des données de biodiversité (équipe IML de la région du Québec) fait avec ANDES.</p>
 <p>Voir la documentation complète ici: <a href="https://mpo-quebec-science.github.io/AndesBiodiversite/" class="external-link uri">https://mpo-quebec-science.github.io/AndesBiodiversite/</a></p>
 </div>
@@ -71,7 +73,7 @@
 <h2 id="installation-de-pilotes-mysql">Installation de pilotes MySQL<a class="anchor" aria-label="anchor" href="#installation-de-pilotes-mysql"></a>
 </h2>
 <p>Les requetes de la BD MySQL Andes requiert un pilote. Le pilote <code>{MySQL ODBC 8.0 Unicode Driver}</code> devraient être disponible pour les postes standards du MPO. Il peut être installé via le center logiciel. Nom: <code>MySQL Connector ODBC</code> Version <code>8.0.22</code> URL: <code>softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539</code></p>
-<p>Une fois le pilote installé, essayez la commande <code>odbc::odbcListDrivers()</code> pour confirmé sa présence.</p>
+<p>Une fois le pilote installé, essayez la commande <code><a href="https://odbc.r-dbi.org/reference/odbcListDrivers.html" class="external-link">odbc::odbcListDrivers()</a></code> pour confirmé sa présence.</p>
 </div>
 </div>
 <div class="section level1">
@@ -186,7 +188,12 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg" alt="Docs"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

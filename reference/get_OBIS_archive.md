@@ -6,7 +6,7 @@ formats it into OBIS-compliant occurrence and event tables.
 ## Usage
 
 ``` r
-get_OBIS_archive(andes_db_connection)
+get_OBIS_archive(andes_db_connection, ...)
 ```
 
 ## Arguments
