@@ -1,7 +1,6 @@
 # ANDES Biodiversité
 <!-- badges: start -->
 [![Docs](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg)](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml)
-
 [![R-CMD-check](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
