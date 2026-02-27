@@ -14,7 +14,7 @@ a dataframe containing andes biodiveristy data
 }
 \description{
 This function executes a SQL query to retrieve the needed andes data to construct a Biodiversity table.
-TODO: The mission filter is not yet implemented everywhere, but should be added in the future. It currently uses the active mission 
+TODO: The mission filter is not yet implemented everywhere, but should be added in the future. It currently uses the active mission
 The current ANDES active mission will determine for which mission the data are returned.
 }
 \seealso{

@@ -4,7 +4,7 @@
 \alias{get_OBIS_archive}
 \title{Extract OBIS archive from ANDES database}
 \usage{
-get_OBIS_archive(andes_db_connection)
+get_OBIS_archive(andes_db_connection, ...)
 }
 \arguments{
 \item{andes_db_connection}{a connection object to the ANDES database.}
