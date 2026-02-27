@@ -95,8 +95,10 @@ obis_time_str <- function(dt, precision, tz = NULL) {
 
 #' rbind, but allow different columns names
 #' Make a union of the rows filling missing columns with NA
-#'
-#'  https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns
+#' https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns
+#' @param df1 Dataframe the first dataframe
+#' @param df2 Dataframe the second dataframe
+#' @return Combined dataframe
 row_union <- function(df1, df2) {
   # special case when the first df is NULL
   if (is.null(df1) && !is.null(df2)) {

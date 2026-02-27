@@ -9,9 +9,9 @@ event_from_mission(mission, parent = NULL, quiet = FALSE)
 \arguments{
 \item{mission}{A dataframe (single row) containing a mission set from an Andes database}
 
-\item{quiet}{Supress console messages (default is FALSE).}
+\item{parent}{The parent event of class OBISEvent (default is NULL). The mission OBISevent is usually usually the top-level event and has no parent.}
 
-\item{parent_event}{The parent event of class OBISEvent (default is NULL). The mission OBISevent is usually usually the top-level event and has no parent.}
+\item{quiet}{Supress console messages (default is FALSE).}
 }
 \value{
 an event of class OBISEvent representing a mission.

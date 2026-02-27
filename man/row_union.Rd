@@ -3,10 +3,21 @@
 \name{row_union}
 \alias{row_union}
 \title{rbind, but allow different columns names
-Make a union of the rows filling missing columns with NA}
+Make a union of the rows filling missing columns with NA
+https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns}
 \usage{
 row_union(df1, df2)
 }
+\arguments{
+\item{df1}{Dataframe the first dataframe}
+
+\item{df2}{Dataframe the second dataframe}
+}
+\value{
+Combined dataframe
+}
 \description{
+rbind, but allow different columns names
+Make a union of the rows filling missing columns with NA
 https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns
 }

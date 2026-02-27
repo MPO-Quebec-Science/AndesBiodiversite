@@ -5,6 +5,7 @@
 #'
 #' @param p1 A list with 'lon' and 'lat' (and optionally 'z') fields for the first point
 #' @param p2 A list with 'lon' and 'lat' (and optionally 'z') fields for the second point
+#' @param fmt format, NOT YET USED !
 #'
 #' defing this here instead of using the package sf to avoid dependency
 #' If we ever import sf or wellknown, we can replace this function

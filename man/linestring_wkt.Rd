@@ -12,7 +12,9 @@ linestring_wkt(p1, p2, fmt = 3)
 \arguments{
 \item{p1}{A list with 'lon' and 'lat' (and optionally 'z') fields for the first point}
 
-\item{p2}{A list with 'lon' and 'lat' (and optionally 'z') fields for the second point
+\item{p2}{A list with 'lon' and 'lat' (and optionally 'z') fields for the second point}
+
+\item{fmt}{format, NOT YET USED !
 
 defing this here instead of using the package sf to avoid dependency
 If we ever import sf or wellknown, we can replace this function}

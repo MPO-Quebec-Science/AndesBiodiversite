@@ -4,7 +4,7 @@
 #' It maps certain fields to a corresponding DwC event fields, and addes hard-coded values where necessary.
 #'
 #' @param mission A dataframe (single row) containing a mission set from an Andes database
-#' @param parent_event The parent event of class OBISEvent (default is NULL). The mission OBISevent is usually usually the top-level event and has no parent.
+#' @param parent The parent event of class OBISEvent (default is NULL). The mission OBISevent is usually usually the top-level event and has no parent.
 #' @param quiet Supress console messages (default is FALSE).
 #'
 #' @return an event of class OBISEvent representing a mission.

@@ -8,6 +8,8 @@ get_OBIS_archive(andes_db_connection, ...)
 }
 \arguments{
 \item{andes_db_connection}{a connection object to the ANDES database.}
+
+\item{...}{Additional arguments passed on to methods}
 }
 \value{
 A dataframe containing the OBIS data. Use `$occurrence` and `$event` to access the respective tables.
