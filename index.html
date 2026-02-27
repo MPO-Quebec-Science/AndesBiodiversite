@@ -55,7 +55,6 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a> <!-- badges: end --></p>
 <p>Ce dépot contient des wrappers en <code>R</code> de commandes <code>SQL</code> pour extraire des données de biodiversité (équipe IML de la région du Québec) fait avec ANDES.</p>
 <p>Voir la documentation complète ici: <a href="https://mpo-quebec-science.github.io/AndesBiodiversite/" class="external-link uri">https://mpo-quebec-science.github.io/AndesBiodiversite/</a></p>
 </div>
@@ -128,7 +127,7 @@
 <p>Il faut faire une séparation entre le code source <em>du package</em> et le code qui <em>utilise</em> le package.</p>
 <p>Le code source R du package lui-même réside sous le dossier <code>./R/</code> (et <code>./inst/</code>). Le code qui <em>utilise</em> le package ne doit jamais se trouver là! Le code qui utilise le package réside chez les évaluateurs / utilisateurs et pas dans ce dépot git.</p>
 <p>Par contre, en tant que dévéloppeur du package il est pratique de pouvoir faire usage du package en meme parallel, cela permet de tester nos ajouts/modifications a mesure. Veuillez voir <code>run.R</code> comme exemple.</p>
-<p>Pour loader le package avec le code présent sous <code>./R/</code> (donc sans installer le package lui-meme), utiliser la fonction <code>devtools::load_all()</code>, vous pourriez ensuite utiliser les fonctions disponibles.</p>
+<p>Pour loader le package avec le code présent sous <code>./R/</code> (donc sans installer le package lui-meme), utiliser la fonction <code><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">devtools::load_all()</a></code>, vous pourriez ensuite utiliser les fonctions disponibles.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> devtools<span class="sc">::</span><span class="fu">load_all</span>()</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ℹ Loading AndesBiodiversite</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">get_biodiv_data</span>(andes_db_connection)</span></code></pre></div>
@@ -148,7 +147,7 @@
 <span><span class="va">add</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">+</span> <span class="va">y</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>Utiliser la fonction <code>devtools::document()</code> pour mettre a jour la documentation dans <code>./man/</code> en utilisant les commentaires <code>doxygen</code></p>
+<p>Utiliser la fonction <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> pour mettre a jour la documentation dans <code>./man/</code> en utilisant les commentaires <code>doxygen</code></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> devtools<span class="sc">::</span><span class="fu">document</span>()</span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>ℹ Updating AndesBiodiversite documentation</span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>ℹ Loading AndesBiodiversite</span>
@@ -192,6 +191,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/documentation.yml/badge.svg" alt="Docs"></a></li>
+<li><a href="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

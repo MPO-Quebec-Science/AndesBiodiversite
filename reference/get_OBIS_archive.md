@@ -15,6 +15,10 @@ get_OBIS_archive(andes_db_connection, ...)
 
   a connection object to the ANDES database.
 
+- ...:
+
+  Additional arguments passed on to methods
+
 ## Value
 
 A dataframe containing the OBIS data. Use \`\$occurrence\` and

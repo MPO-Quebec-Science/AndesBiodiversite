@@ -1,7 +1,5 @@
 # ANDES Biodiversité
 
-[![R-CMD-check](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/MPO-Quebec-Science/AndesBiodiversite/actions/workflows/R-CMD-check.yaml)
-
 Ce dépot contient des wrappers en `R` de commandes `SQL` pour extraire
 des données de biodiversité (équipe IML de la région du Québec) fait
 avec ANDES.
@@ -108,8 +106,8 @@ nos ajouts/modifications a mesure. Veuillez voir `run.R` comme exemple.
 
 Pour loader le package avec le code présent sous `./R/` (donc sans
 installer le package lui-meme), utiliser la fonction
-`devtools::load_all()`, vous pourriez ensuite utiliser les fonctions
-disponibles.
+[`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html),
+vous pourriez ensuite utiliser les fonctions disponibles.
 
 ``` r
 > devtools::load_all()
@@ -137,8 +135,10 @@ add <- function(x, y) {
 }
 ```
 
-Utiliser la fonction `devtools::document()` pour mettre a jour la
-documentation dans `./man/` en utilisant les commentaires `doxygen`
+Utiliser la fonction
+[`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
+pour mettre a jour la documentation dans `./man/` en utilisant les
+commentaires `doxygen`
 
 ``` r
 > devtools::document()
@@ -187,6 +187,7 @@ Writing add.Rd
   OBISOccurence from an Andes catch
 - [`row_union()`](row_union.md) : rbind, but allow different columns
   names Make a union of the rows filling missing columns with NA
+  https://stackoverflow.com/questions/3402371/combine-two-data-frames-by-rows-rbind-when-they-have-different-sets-of-columns
 
 # Articles
 

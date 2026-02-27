@@ -17,14 +17,14 @@ event_from_mission(mission, parent = NULL, quiet = FALSE)
   A dataframe (single row) containing a mission set from an Andes
   database
 
-- quiet:
-
-  Supress console messages (default is FALSE).
-
-- parent_event:
+- parent:
 
   The parent event of class OBISEvent (default is NULL). The mission
   OBISevent is usually usually the top-level event and has no parent.
+
+- quiet:
+
+  Supress console messages (default is FALSE).
 
 ## Value
 
