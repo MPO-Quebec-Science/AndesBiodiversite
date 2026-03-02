@@ -1,5 +1,9 @@
 # Format des données
 
+``` r
+library(AndesBiodiversite)
+```
+
 ## Données qualitative OBIS
 
 Une archive darwin-core (DwCA) contenant uniquement les informations
