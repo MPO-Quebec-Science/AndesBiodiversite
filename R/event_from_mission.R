@@ -9,7 +9,7 @@
 #'
 #' @return an event of class OBISEvent representing a mission.
 #' @seealso [get_andes_mission()] for getting a list of missions  (usualy only a single active mission) from the Andes DB.
-#' @family {OBISEvent creation functions}
+#' @family OBISEvent creation functions
 #' @export
 event_from_mission <- function(mission, parent = NULL, quiet = FALSE) {
   if (quiet == FALSE) {

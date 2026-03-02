@@ -8,7 +8,7 @@
 #'
 #' @return a dataframe containing andes biodiveristy data
 #' @seealso [andes_db_connect()] for getting a connection object to the ANDES database.
-#' @family {Andesdb query functions}
+#' @family Andesdb query functions
 #' @export
 get_biodiv_data <- function(andes_db_connection) {
   query <- readr::read_file(system.file(

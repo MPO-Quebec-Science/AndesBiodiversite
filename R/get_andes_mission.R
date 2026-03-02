@@ -6,7 +6,7 @@
 #' @param andes_db_connection A connection object to the ANDES database.
 #' @return a dataframe containing andes catch rows
 #' @seealso [andes_db_connect()] for getting a connection object to the ANDES database.
-#' @family {Andesdb query functions}
+#' @family Andesdb query functions
 #' @export
 get_andes_mission <- function(andes_db_connection) {
   sql_query <- "

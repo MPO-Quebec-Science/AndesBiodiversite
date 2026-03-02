@@ -1,7 +1,11 @@
 ---
 title: "Format des données"
-output: rmarkdown::html_document
 nocite: '@*'
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Format des données}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -11,6 +15,9 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r setup}
+library(AndesBiodiversite)
+```
 
 # Données qualitative OBIS
 Une archive darwin-core (DwCA) contenant uniquement les informations d'occurrences.

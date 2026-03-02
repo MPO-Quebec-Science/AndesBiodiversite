@@ -20,4 +20,4 @@ an occurrence of class OBISOccurence representing the catch.
 This function creates an OBISOccurence object representing a catch from the Andes database.
 It maps certain fields to a corresponding DwC event fields, and addes hard-coded values where necessary.
 }
-\concept{{OBISOccurrence creation functions}}
+\concept{OBISOccurrence creation functions}

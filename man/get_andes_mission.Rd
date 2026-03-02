@@ -19,9 +19,9 @@ TODO: The mission filter is not yet implemented everywhere, but should be added 
 \seealso{
 [andes_db_connect()] for getting a connection object to the ANDES database.
 
-Other {Andesdb query functions}: 
+Other Andesdb query functions: 
 \code{\link{get_andes_catch}()},
 \code{\link{get_andes_set}()},
 \code{\link{get_biodiv_data}()}
 }
-\concept{{Andesdb query functions}}
+\concept{Andesdb query functions}

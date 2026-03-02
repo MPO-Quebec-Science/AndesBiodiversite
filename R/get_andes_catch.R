@@ -8,7 +8,7 @@
 #'
 #' @return a dataframe containing andes catch rows
 #' @seealso [andes_db_connect()] for getting a connection object to the ANDES database.
-#' @family {Andesdb query functions}
+#' @family Andesdb query functions
 #' @export
 get_andes_catch <- function(andes_db_connection, mission_id = NULL) {
   sql_query <- readr::read_file(system.file(

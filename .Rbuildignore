@@ -4,3 +4,10 @@
 ^\.github$
 ^[.]?air[.]toml$
 ^\.vscode$
+
+
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+SECURITY.md
+example.Renviron
+run.R

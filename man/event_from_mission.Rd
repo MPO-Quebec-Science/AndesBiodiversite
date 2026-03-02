@@ -23,7 +23,7 @@ It maps certain fields to a corresponding DwC event fields, and addes hard-coded
 \seealso{
 [get_andes_mission()] for getting a list of missions  (usualy only a single active mission) from the Andes DB.
 
-Other {OBISEvent creation functions}: 
+Other OBISEvent creation functions: 
 \code{\link{event_from_fishing_set}()}
 }
-\concept{{OBISEvent creation functions}}
+\concept{OBISEvent creation functions}

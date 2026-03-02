@@ -6,7 +6,7 @@
 #' @param set A dataframe (single row) containing a fishing set from ANDES database
 #' @param parent_event The parent event of class OBISEvent (default is NULL).
 #' @param quiet Supress console messages (default is FALSE).
-#' @family {OBISEvent creation functions}
+#' @family OBISEvent creation functions
 #' @seealso [get_andes_set()] for getting a list of sets from the Andes DB.
 #' @return an event of class OBISEvent representing a fishing set
 #' @export

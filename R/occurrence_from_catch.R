@@ -8,7 +8,7 @@
 #' @param quiet Supress console messages (default is FALSE).
 #'
 #' @return an occurrence of class OBISOccurence representing the catch.
-#' @family {OBISOccurrence creation functions}
+#' @family OBISOccurrence creation functions
 #' @export
 occurrence_from_catch <- function(catch, event = NULL, quiet = FALSE) {
   if (quiet == FALSE) {
