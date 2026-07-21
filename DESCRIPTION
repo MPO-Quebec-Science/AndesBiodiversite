@@ -10,7 +10,6 @@ Description: Ce package contient une collection de fonctions utilitaires pour
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.3
 Imports:
     DBI,
     odbc,
@@ -25,3 +24,4 @@ Suggests:
     pandoc
 Config/testthat/edition: 3
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0
