@@ -14,15 +14,16 @@ catch_reassign <- function(catch_ids = NULL, aphia_id = NULL, quiet = FALSE) {
     stop("need to provide an aphia_id to assign")
   }
 
-  if (!is.numeric(aphia_id)) {
-    stop("aphia_id has to be an integer")
+  if (is.null(catch_ids)) {
+    stop("need to provide a list of catches")
   }
 
-  if (is.null(FALSE)) {
-    message("need to provide a list of catches")
+  if (!is.numeric(aphia_id)) {
+    stop("aphia_id has to be a number")
   }
+
   if (length(catch_ids) < 1) {
-    message("List of catches is empty!")
+    stop("List of catches is empty!")
   }
 
   # sanity-check #1, make sure aphia_id is present in the reference catch list
