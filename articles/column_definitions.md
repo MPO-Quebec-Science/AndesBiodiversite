@@ -1,6 +1,7 @@
 # Format des données
 
 ``` r
+
 library(AndesBiodiversite)
 ```
 
@@ -158,58 +159,71 @@ Toujours vide, doit etre remplis manuellement.
 
 ### Données quantitatives, les trois niveaux d’échantionnage
 
-`SUBSAMPLE_COUNT` : ($N_{subsampled}$) Dénombrement des individu
+`SUBSAMPLE_COUNT` : ($`N_\mathrm{subsampled}`$) Dénombrement des
+individu prélevés pour un sous-échantillon lorsque la quantité total de
+cette espèce est trop importante ou impossible à compter par sa nature
+(exemple : éponge encroutante). Ce sous-échantillon provient souvent du
+tri de l’espèce, mais il peux provenir du tri totale.
+
+`SUBSAMPLE_MASS_G` : ($`M_\mathrm{subsampled}`$) Poids des individu
 prélevés pour un sous-échantillon lorsque la quantité total de cette
 espèce est trop importante ou impossible à compter par sa nature
 (exemple : éponge encroutante). Ce sous-échantillon provient souvent du
 tri de l’espèce, mais il peux provenir du tri totale.
 
-`SUBSAMPLE_MASS_G` : ($M_{subsampled}$) Poids des individu prélevés pour
-un sous-échantillon lorsque la quantité total de cette espèce est trop
-importante ou impossible à compter par sa nature (exemple : éponge
-encroutante). Ce sous-échantillon provient souvent du tri de l’espèce,
-mais il peux provenir du tri totale.
+`SORTED_COUNT` : ($`N_\mathrm{sorted}`$) Dénombrement des individus
+TRIÉS d’un espèce.
 
-`SORTED_COUNT` : ($N_{sorted}$) Dénombrement des individus TRIÉS d’un
+`SORTED_MASS` : ($`M_\mathrm{sorted}`$) Poids des individus TRIÉS d’un
 espèce.
 
-`SORTED_MASS` : ($M_{sorted}$) Poids des individus TRIÉS d’un espèce.
+`FINAL_COUNT` : ($`N_\mathrm{final}`$) Résultat d’un calcul. Représente
+le dénombrement et le poids ramené à la capture totale.
 
-`FINAL_COUNT` : ($N_{final}$) Résultat d’un calcul. Représente le
-dénombrement et le poids ramené à la capture totale.
+`FINAL_MASS` : ($`M_\mathrm{final}`$) Résultat d’un calcul. Représente
+le poids ramené à la capture totale.
 
-`FINAL_MASS` : ($M_{final}$) Résultat d’un calcul. Représente le poids
-ramené à la capture totale.
-
-`MULTIPLICATEUR` : ($k$) Valeur utilisé pour ramener la fraction du tri
-de l’espèce à la capture totale.
+`MULTIPLICATEUR` : ($`k`$) Valeur utilisé pour ramener la fraction du
+tri de l’espèce à la capture totale.
 
 #### Définitions mathématiques
 
-Pour une espece donné, les valeurs de dénombrement $N_{final}$ et masse
-$M_{final}$ sont calculées à partir des valeurs triées $N_{sorted}$ et
-$M_{sorted}$ comme suit: $$\begin{array}{r}
-{N_{final} = kN_{sorted}} \\
-{M_{final} = kM_{sorted},}
-\end{array}$$ ou le multiplicateur $k$ est défini comme suit:
-$$k = \begin{cases}
-{1,} & \text{tri de l’espece sur la capture complète} \\
-{4,} & {\text{tri de l’espece sur le quart Biodiversité}.}
-\end{cases}$$ Mais il peux avoir d’autre valeurs exceptionel selon la
-fraction triée.
+Pour une espece donné, les valeurs de dénombrement $`N_\mathrm{final}`$
+et masse $`M_\mathrm{final}`$ sont calculées à partir des valeurs triées
+$`N_\mathrm{sorted}`$ et $`M_\mathrm{sorted}`$ comme suit:
+``` math
+\begin{eqnarray}
+N_\mathrm{final} = k N_\mathrm{sorted} \\
+M_\mathrm{final} = k M_\mathrm{sorted} ,
+\end{eqnarray}
+```
+ou le multiplicateur $`k`$ est défini comme suit:
+``` math
+k =
+\begin{cases}
+    1, & \text{tri de l'espece sur la capture complète} \\
+    4, & \text{tri de l'espece sur le quart Biodiversité}.
+\end{cases}
+```
+Mais il peux avoir d’autre valeurs exceptionel selon la fraction triée.
 
-Il arrive parfois que $N_{sorted}$ proviennt d’une extrapolation d’un
-sous-échantillon $N_{subsampled} \approx 30$ quand le dénombrement est
-trop fastidieux :). Dans le cas échéant, un sous-échantillon est prélevé
-et dénombré, puis le dénombrement du tri est estimé comme suit:
-$$N_{sorted} = N_{subsampled}\frac{M_{sorted}}{M_{subsampled}},$$où les
-masses $M_{sorted}$ et $M_{ech}$ sont mesurées respectivement sur le tri
-et le sous-échantillon.
+Il arrive parfois que $`N_\mathrm{sorted}`$ proviennt d’une
+extrapolation d’un sous-échantillon $`N_\mathrm{subsampled}\approx 30`$
+quand le dénombrement est trop fastidieux :). Dans le cas échéant, un
+sous-échantillon est prélevé et dénombré, puis le dénombrement du tri
+est estimé comme suit:
+``` math
+N_\mathrm{sorted} = N_\mathrm{subsampled} \frac{M_\mathrm{sorted}}{M_\mathrm{subsampled}},
+```
+où les masses $`M_\mathrm{sorted}`$ et $`M_\mathrm{ech}`$ sont mesurées
+respectivement sur le tri et le sous-échantillon.
 
 Exceptionellement pour les relevés de concombre de mer, le dénombrement
-du tri est éffectué, mais c’est la masse du tri $M_{sorted}$ qui est
-estimée à partir d’un sous-échantillon:
-$$M_{sorted} = M_{subsampled}\frac{N_{sorted}}{N_{subsampled}}.$$
+du tri est éffectué, mais c’est la masse du tri $`M_\mathrm{sorted}`$
+qui est estimée à partir d’un sous-échantillon:
+``` math
+M_\mathrm{sorted} = M_\mathrm{subsampled} \frac{N_\mathrm{sorted}}{N_\mathrm{subsampled}}.
+```
 
 ![Les trois niveaux](trois_niveaux_biodiv.png)
 

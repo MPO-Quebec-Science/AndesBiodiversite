@@ -4,6 +4,8 @@
 
 - [`andes_db_connect()`](andes_db_connect.md) : Establish a connection
   to the andes database
+- [`catch_reassign()`](catch_reassign.md) : creates an SQL script that
+  will reassign a list of catches to a new reference catch
 - [`.calc_nautical_dist()`](dot-calc_nautical_dist.md) : Calculate
   nautical distance between two geographic points \#' This function
   calculates the great-circle distance between two points on the Earth's

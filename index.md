@@ -54,6 +54,7 @@ Ces informations seront par la suite disponnible via la fonction
 cette exemple ci-bas.
 
 ``` r
+
 # Infos connexion BD, voir section Authentification Connexion BD
 url_bd <- "iml-science-4.ent.dfo-mpo.ca"
 port_bd <- 25988
@@ -65,6 +66,7 @@ mot_de_passe <- Sys.getenv("MOT_DE_PASSE_BD")
 Tester la connexion
 
 ``` r
+
 # établir connexion BD (il faut être sur le réseau MPO)
 andes_db_connection <- andes_db_connect(
   url_bd = url_bd,
@@ -78,6 +80,7 @@ andes_db_connection <- andes_db_connect(
 ## 1. Obtenir les données avec `get_biodiv_data()` et `get_OBIS_archive()`
 
 ``` r
+
 df <- get_biodiv_data(andes_db_connection)
 write.csv(df, "IML-2024-009-quantitative.csv", row.names = FALSE, na = "")
 
@@ -122,6 +125,7 @@ sous le format `doxygen`. Par exemple, ceci pourrait être le contenu du
 fichier `./R/add.R` :
 
 ``` r
+
 #' Add together two numbers
 #'
 #' @param x A numeric value.
