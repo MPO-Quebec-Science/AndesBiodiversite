@@ -5,8 +5,9 @@
 devtools::load_all()
 
 # tester ces variables environnementals pour pouvoir établir une connexion
+
 url_bd <- "iml-science-4.ent.dfo-mpo.ca"
-port_bd <- 24991
+port_bd <- 25988
 nom_bd <- "andesdb"
 nom_usager <- Sys.getenv("NOM_USAGER_BD")
 mot_de_passe <- Sys.getenv("MOT_DE_PASSE_BD")
@@ -22,7 +23,6 @@ andes_db_connection <- andes_db_connect(
 
 devtools::load_all()
 
-
 df <- get_biodiv_data(andes_db_connection)
 write.csv(df, "IML-2024-009-quantitative.csv", row.names = FALSE, na = "")
 
@@ -35,6 +35,16 @@ write.csv(
   row.names = FALSE,
   na = ""
 )
+
+# catch_reassign example
+# liste des captures (catch_id) à re-assigner
+catch_ids <- c(1005, 1083, 1648, 1882, 2008)
+# le nouveau aphia_id pour ces captures
+aphia_id <- 345568
+# lancer la fonction pour re-assigner
+catch_reassign(catch_ids, aphia_id)
+# sauvegarder le code SQL
+write(code_sql, "update_catches_IML-2024-008.SQL")
 
 
 # documenter vos changements
