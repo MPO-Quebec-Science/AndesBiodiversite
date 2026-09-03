@@ -177,6 +177,11 @@ Writing add.Rd
 - [`get_andes_set()`](get_andes_set.md) : Get a set dataframe
 - [`get_biodiv_data()`](get_biodiv_data.md) : Gets biodiversity data
   from ANDES database
+- [`get_biodiv_specimen_data()`](get_biodiv_specimen_data.md) : Gets all
+  catch data from ANDES database, same as get-biodiv_data but does not
+  filter by class and includes specimen count
+- [`left_join()`](left_join.md) : a merge that preserves row and column
+  order
 - [`linestring_wkt()`](linestring_wkt.md) : Create a WKT linestring from
   two points This function creates a WKT (Well-Known Text)
   representation of a linestring connecting two points. Each point is

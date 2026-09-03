@@ -34,4 +34,5 @@ database.
 Other Andesdb query functions:
 [`get_andes_catch()`](get_andes_catch.md),
 [`get_andes_mission()`](get_andes_mission.md),
-[`get_biodiv_data()`](get_biodiv_data.md)
+[`get_biodiv_data()`](get_biodiv_data.md),
+[`get_biodiv_specimen_data()`](get_biodiv_specimen_data.md)

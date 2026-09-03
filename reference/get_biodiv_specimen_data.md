@@ -1,4 +1,4 @@
-# Gets biodiversity data from ANDES database
+# Gets all catch data from ANDES database, same as get-biodiv_data but does not filter by class and includes specimen count
 
 This function executes a SQL query to retrieve the needed andes data to
 construct a Biodiversity table. TODO: The mission filter is not yet
@@ -9,7 +9,7 @@ for which mission the data are returned.
 ## Usage
 
 ``` r
-get_biodiv_data(andes_db_connection)
+get_biodiv_specimen_data(andes_db_connection)
 ```
 
 ## Arguments
@@ -31,4 +31,4 @@ Other Andesdb query functions:
 [`get_andes_catch()`](get_andes_catch.md),
 [`get_andes_mission()`](get_andes_mission.md),
 [`get_andes_set()`](get_andes_set.md),
-[`get_biodiv_specimen_data()`](get_biodiv_specimen_data.md)
+[`get_biodiv_data()`](get_biodiv_data.md)

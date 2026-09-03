@@ -18,7 +18,9 @@
 <url><loc>/reference/get_andes_mission.html</loc></url>
 <url><loc>/reference/get_andes_set.html</loc></url>
 <url><loc>/reference/get_biodiv_data.html</loc></url>
+<url><loc>/reference/get_biodiv_specimen_data.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/left_join.html</loc></url>
 <url><loc>/reference/linestring_wkt.html</loc></url>
 <url><loc>/reference/make_set_wkt.html</loc></url>
 <url><loc>/reference/obis_datetime_str.html</loc></url>
