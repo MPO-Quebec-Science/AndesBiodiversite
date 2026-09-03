@@ -1,7 +1,7 @@
 Package: AndesBiodiversite
 Type: Package
 Title: Helper Functions to easily Access ANDES database Data formated for the Biodiversity Team
-Version: 0.1.0
+Version: 0.2.0
 Author: Les amis de l'IML
 Maintainer: David Sean-Fortin <david.sean-fortin@dfo-mpo.gc.ca>
 Description: Ce package contient une collection de fonctions utilitaires pour
