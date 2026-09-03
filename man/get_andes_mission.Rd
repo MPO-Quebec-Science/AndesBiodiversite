@@ -22,6 +22,7 @@ TODO: The mission filter is not yet implemented everywhere, but should be added 
 Other Andesdb query functions:
 \code{\link[=get_andes_catch]{get_andes_catch()}},
 \code{\link[=get_andes_set]{get_andes_set()}},
-\code{\link[=get_biodiv_data]{get_biodiv_data()}}
+\code{\link[=get_biodiv_data]{get_biodiv_data()}},
+\code{\link[=get_biodiv_specimen_data]{get_biodiv_specimen_data()}}
 }
 \concept{Andesdb query functions}
