@@ -33,7 +33,7 @@ predateur_noms <- c(
   "Hyas alutaceus",
   "Asterias rubens",
   "Solaster endeca",
-  "Crossaster papposus"
+  "Crossaster papposus",
   "Henricia",
   "Leptasterias (Hexasterias) polaris",
   "Leptasterias groenlandica"
@@ -59,7 +59,7 @@ sampled_predator_data <- subset(
 # get regular dataframe
 df <- get_biodiv_data(andes_db_connection)
 
-df <- left_join(
+df <- left_join_preserve_order(
   df,
   sampled_predator_data,
   by = c(
