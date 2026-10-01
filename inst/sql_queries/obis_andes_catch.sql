@@ -15,6 +15,6 @@ LEFT JOIN shared_models_basket
 LEFT JOIN shared_models_mission
     ON shared_models_sample.mission_id=shared_models_mission.id
 WHERE shared_models_mission.is_active="1"
-AND (shared_models_basket.size_class=9 OR shared_models_basket.size_class IS NULL)
+AND (shared_models_basket.size_class_object_id=shared_models_mission.biodiversity_basket_class_id OR shared_models_basket.size_class IS NULL)
 AND shared_models_referencecatch.is_mixed_catch=0
 ORDER BY sample_number ASC
