@@ -23,7 +23,7 @@ Nom: `MySQL Connector ODBC`
 Version `8.0.22`
 URL: `softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539`
 
-Une fois le pilote installé, essayez la commande `odbc::odbcListDrivers()` pour confirmé sa présence.
+Une fois le pilote installé, essayez la commande `odbc::odbcListDrivers()` pour confirmer sa présence.
 
 
 # Utilisation
