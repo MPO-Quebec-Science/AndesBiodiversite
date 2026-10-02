@@ -24,7 +24,7 @@ Nom: `MySQL Connector ODBC` Version `8.0.22` URL:
 
 Une fois le pilote installé, essayez la commande
 [`odbc::odbcListDrivers()`](https://odbc.r-dbi.org/reference/odbcListDrivers.html)
-pour confirmé sa présence.
+pour confirmer sa présence.
 
 # Utilisation
 
