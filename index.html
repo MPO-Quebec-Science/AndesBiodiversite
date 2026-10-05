@@ -61,18 +61,28 @@
 <div class="section level1">
 <h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h1>
-<ul>
-<li>installer le pilote MySQL <code>MySQL Connector ODBC</code> du centre logiciel</li>
-<li>installer le package devtools <code>install.packages("devtools")</code>
-</li>
-<li>utiliser devtools pour installer le package <code>devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")</code>
-</li>
-</ul>
 <div class="section level2">
 <h2 id="installation-de-pilotes-mysql">Installation de pilotes MySQL<a class="anchor" aria-label="anchor" href="#installation-de-pilotes-mysql"></a>
 </h2>
 <p>Les requetes de la BD MySQL Andes requiert un pilote. Le pilote <code>{MySQL ODBC 8.0 Unicode Driver}</code> devraient être disponible pour les postes standards du MPO. Il peut être installé via le center logiciel. Nom: <code>MySQL Connector ODBC</code> Version <code>8.0.22</code> URL: <code>softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539</code></p>
 <p>Une fois le pilote installé, essayez la commande <code><a href="https://odbc.r-dbi.org/reference/odbcListDrivers.html" class="external-link">odbc::odbcListDrivers()</a></code> pour confirmer sa présence.</p>
+<div class="section level3">
+<h3 id="option-1-installer-avec-pak">Option 1 installer avec <code>pak</code>
+<a class="anchor" aria-label="anchor" href="#option-1-installer-avec-pak"></a>
+</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#detach("package:AndesBiodiversite", unload = TRUE)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"pak"</span>)<span class="st">`</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="at">pak::pak("MPO-Quebec-Science/AndesBiodiversite")</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="option-2-installer-avec-devtools">Option 2 installer avec <code>devtools</code>
+<a class="anchor" aria-label="anchor" href="#option-2-installer-avec-devtools"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#detach("package:AndesBiodiversite", unload = TRUE)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install-deprecated.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"MPO-Quebec-Science/AndesBiodiversite"</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
 <div class="section level1">
@@ -89,7 +99,7 @@
 <p>Il est FORTEMENT DÉCONSIELLER de mettre les mots de passes directement dans un script (mais vouz pouvez le faire temporairement pour déboguguer). Il faut voir les scripts comme étant publique et ouvert a tous.</p>
 <p>Pour sauvegarder les mots de passes de BD, il faut faire une copie du fichier gabarit <code>exemple.Renviron</code> et le nomer <code>.Renviron</code>. Par la suite il faut remplir le nom d’usagé et le mot de passe pour pouvoir faire une connexion a la BD. Il est possible de falloir redémarré <code>R</code> apres avoir modifier <code>.Renviron</code> car la lecture est uniquement fait au démarage de <code>R</code>. Le fichier <code>.Renviron</code> peut être placé dans le dossier home de l’usager <code>C:\Users\TON_NOM</code> (sur windows) ou <code>/home/TON_NOM</code> (sur Linux).</p>
 <p>Ces informations seront par la suite disponnible via la fonction <code><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv()</a></code>, comme dans cette exemple ci-bas.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Infos connexion BD, voir section Authentification Connexion BD</span></span>
 <span><span class="va">url_bd</span> <span class="op">&lt;-</span> <span class="st">"iml-science-4.ent.dfo-mpo.ca"</span></span>
 <span><span class="va">port_bd</span> <span class="op">&lt;-</span> <span class="fl">25988</span></span>
@@ -97,7 +107,7 @@
 <span><span class="va">nom_usager</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"NOM_USAGER_BD"</span><span class="op">)</span></span>
 <span><span class="va">mot_de_passe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"MOT_DE_PASSE_BD"</span><span class="op">)</span></span></code></pre></div>
 <p>Tester la connexion</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># établir connexion BD (il faut être sur le réseau MPO)</span></span>
 <span><span class="va">andes_db_connection</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/andes_db_connect.html">andes_db_connect</a></span><span class="op">(</span></span>
 <span>  url_bd <span class="op">=</span> <span class="va">url_bd</span>,</span>
@@ -111,7 +121,7 @@
 <h2 id="id_1-obtenir-les-données-avec-get_biodiv_data-et-get_obis_archive">1. Obtenir les données avec <code>get_biodiv_data()</code> et <code>get_OBIS_archive()</code>
 <a class="anchor" aria-label="anchor" href="#id_1-obtenir-les-donn%C3%A9es-avec-get_biodiv_data-et-get_obis_archive"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_biodiv_data.html">get_biodiv_data</a></span><span class="op">(</span><span class="va">andes_db_connection</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"IML-2024-009-quantitative.csv"</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span>, na <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
 <span></span>
@@ -128,14 +138,14 @@
 <p>Le code source R du package lui-même réside sous le dossier <code>./R/</code> (et <code>./inst/</code>). Le code qui <em>utilise</em> le package ne doit jamais se trouver là! Le code qui utilise le package réside chez les évaluateurs / utilisateurs et pas dans ce dépot git.</p>
 <p>Par contre, en tant que dévéloppeur du package il est pratique de pouvoir faire usage du package en meme parallel, cela permet de tester nos ajouts/modifications a mesure. Veuillez voir <code>run.R</code> comme exemple.</p>
 <p>Pour loader le package avec le code présent sous <code>./R/</code> (donc sans installer le package lui-meme), utiliser la fonction <code><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">devtools::load_all()</a></code>, vous pourriez ensuite utiliser les fonctions disponibles.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> devtools<span class="sc">::</span><span class="fu">load_all</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>ℹ Loading AndesBiodiversite</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">get_biodiv_data</span>(andes_db_connection)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> devtools<span class="sc">::</span><span class="fu">load_all</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>ℹ Loading AndesBiodiversite</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="sc">&gt;</span> df <span class="ot">&lt;-</span> <span class="fu">get_biodiv_data</span>(andes_db_connection)</span></code></pre></div>
 <div class="section level2">
 <h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
 </h2>
 <p>Documenter brievement les fonctions individuelles avec des commentaires sous le format <code>doxygen</code>. Par exemple, ceci pourrait être le contenu du fichier <code>./R/add.R</code> :</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#' Add together two numbers</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="co">#' @param x A numeric value.</span></span>
@@ -148,11 +158,11 @@
 <span>  <span class="va">x</span> <span class="op">+</span> <span class="va">y</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Utiliser la fonction <code><a href="https://devtools.r-lib.org/reference/document.html" class="external-link">devtools::document()</a></code> pour mettre a jour la documentation dans <code>./man/</code> en utilisant les commentaires <code>doxygen</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="sc">&gt;</span> devtools<span class="sc">::</span><span class="fu">document</span>()</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>ℹ Updating AndesBiodiversite documentation</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>ℹ Loading AndesBiodiversite</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>Writing NAMESPACE</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>Writing add.Rd</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> devtools<span class="sc">::</span><span class="fu">document</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>ℹ Updating AndesBiodiversite documentation</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>ℹ Loading AndesBiodiversite</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>Writing NAMESPACE</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Writing add.Rd</span></code></pre></div>
 </div>
 </div>
 
