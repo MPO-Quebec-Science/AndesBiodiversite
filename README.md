@@ -11,10 +11,6 @@ Voir la documentation complète ici: https://mpo-quebec-science.github.io/AndesB
 
 # Installation
 
- - installer le pilote MySQL `MySQL Connector ODBC` du centre logiciel
- - installer le package devtools `install.packages("devtools")`
- - utiliser devtools pour installer le package `devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")`
-
 ## Installation de pilotes MySQL
 Les requetes de la BD MySQL Andes requiert un pilote.
 Le pilote `{MySQL ODBC 8.0 Unicode Driver}` devraient être disponible pour les postes standards du MPO.
@@ -24,6 +20,20 @@ Version `8.0.22`
 URL: `softwarecenter:SoftwareID=ScopeId_A90E3BBE-DB35-4A92-A44E-15F8C7C595B3/Application_dec16a4a-d57f-44b1-8a9f-8f6267f34539`
 
 Une fois le pilote installé, essayez la commande `odbc::odbcListDrivers()` pour confirmer sa présence.
+
+### Option 1 installer avec `pak`
+ ``` R
+ #detach("package:AndesBiodiversite", unload = TRUE)
+ install.packages("pak")`
+ pak::pak("MPO-Quebec-Science/AndesBiodiversite")
+ ```
+
+### Option 2 installer avec `devtools`
+``` R
+#detach("package:AndesBiodiversite", unload = TRUE)
+install.packages("devtools")
+devtools::install_github("MPO-Quebec-Science/AndesBiodiversite")
+```
 
 
 # Utilisation
